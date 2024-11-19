@@ -48,8 +48,7 @@ class TomlParserTest implements RewriteTest {
         rewriteRun(
           toml(
             """
-            
-              # fractional
+            # fractional
             flt1 = +1.0
             flt2 = 3.1415
             flt3 = -0.01

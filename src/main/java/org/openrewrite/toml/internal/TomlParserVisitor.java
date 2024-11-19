@@ -2,6 +2,8 @@ package org.openrewrite.toml.internal;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.jspecify.annotations.Nullable;
 import org.openrewrite.FileAttributes;
@@ -9,13 +11,17 @@ import org.openrewrite.internal.EncodingDetectingInputStream;
 import org.openrewrite.marker.Markers;
 import org.openrewrite.toml.internal.grammar.TomlParser;
 import org.openrewrite.toml.internal.grammar.TomlParserBaseVisitor;
-import org.openrewrite.toml.tree.*;
+import org.openrewrite.toml.tree.Space;
+import org.openrewrite.toml.tree.Toml;
+import org.openrewrite.toml.tree.TomlKey;
+import org.openrewrite.toml.tree.TomlRightPadded;
 
 import java.nio.charset.Charset;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.function.BiFunction;
-import java.util.stream.Collectors;
 
 import static org.openrewrite.Tree.randomId;
 
@@ -40,8 +46,53 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
     }
 
     @Override
+    public Toml visitChildren(RuleNode node) {
+        Toml result = defaultResult();
+        int n = node.getChildCount();
+        for (int i = 0; i < n; i++) {
+            if (!shouldVisitNextChild(node, result)) {
+                break;
+            }
+
+            ParseTree c = node.getChild(i);
+            if (c instanceof TomlParser.CommentContext) {
+                continue;
+            }
+
+            Toml childResult = c.accept(this);
+            result = aggregateResult(result, childResult);
+        }
+
+        return result;
+    }
+
+    @Override
     public Toml.Document visitDocument(TomlParser.DocumentContext ctx) {
-        return !ctx.children.isEmpty() && ctx.children.get(0) instanceof TerminalNode && ((TerminalNode) ctx.children.get(0)).getSymbol().getType() == TomlParser.EOF ? new Toml.Document(
+        if (!ctx.children.isEmpty() && ctx.children.get(0) instanceof TerminalNode && ((TerminalNode) ctx.children.get(0)).getSymbol().getType() == TomlParser.EOF) {
+            new Toml.Document(
+                    randomId(),
+                    path,
+                    Space.EMPTY,
+                    Markers.EMPTY,
+                    charset.name(),
+                    charsetBomMarked,
+                    null,
+                    fileAttributes,
+                    Collections.emptyList(),
+                    Space.EMPTY
+            );
+        }
+
+        List<Toml> elements = new ArrayList<>();
+        // The last element is a "TerminalNode" which we are uninterested in
+        for (int i = 0; i < ctx.children.size() - 1; i++) {
+            Toml element = visit(ctx.children.get(i));
+            if (element != null) {
+                elements.add(element);
+            }
+        }
+
+        return new Toml.Document(
                 randomId(),
                 path,
                 Space.EMPTY,
@@ -50,55 +101,68 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                 charsetBomMarked,
                 null,
                 fileAttributes,
-                Collections.emptyList(),
-                Space.EMPTY
-        ) : convert(ctx, (c, prefix) -> new Toml.Document(
-                randomId(),
-                path,
-                prefix,
-                Markers.EMPTY,
-                charset.name(),
-                charsetBomMarked,
-                null,
-                fileAttributes,
-                c.expression().stream().map(e -> (TomlValue) visit(e)).collect(Collectors.toList()),
+                elements,
                 Space.format(source, cursor, source.length())
-        ));
+        );
     }
 
     @Override
     public TomlKey visitKey(TomlParser.KeyContext ctx) {
-        return new Toml.Identifier(
+        return convert(ctx, (c, prefix) -> new Toml.Identifier(
                 randomId(),
-                Space.EMPTY,
+                prefix,
                 Markers.EMPTY,
-                ctx.getText()
-        );
+                c.getText()
+        ));
     }
 
     @Override
     public Toml.KeyValue visitKey_value(TomlParser.Key_valueContext ctx) {
-        return new Toml.KeyValue(
+        return convert(ctx, (c, prefix) -> new Toml.KeyValue(
                 randomId(),
-                Space.EMPTY,
+                prefix,
                 Markers.EMPTY,
-                TomlRightPadded.build(visitKey(ctx.key())).withAfter(sourceBefore("=")),
-                visitValue(ctx.value())
-        );
+                TomlRightPadded.build(visitKey(c.key())).withAfter(sourceBefore("=")),
+                visitValue(c.value())
+            ));
     }
 
     @Override
-    public Toml.Literal visitValue(TomlParser.ValueContext ctx) {
-        if (ctx.string() != null) {
-            return convert(ctx, (c, prefix) -> new Toml.Literal(
+    public Toml visitString(TomlParser.StringContext ctx) {
+        return convert(ctx, (c, prefix) -> {
+            String string = c.getText();
+            return new Toml.Literal(
                     randomId(),
                     prefix,
                     Markers.EMPTY,
-                    c.getText(),
-                    c.getText()
-            ));
-        }
-        return null;
+                    string,
+                    string.substring(1, string.length() - 1)
+            );
+        });
+    }
+
+    @Override
+    public Toml visitInteger(TomlParser.IntegerContext ctx) {
+        return convert(ctx, (c, prefix) -> {
+            String rawNumber = c.getText();
+            String number = rawNumber.replace("_", "");
+            Long numberValue = rawNumber.startsWith("0x") ? Long.parseLong(number.substring(2), 16) :
+                    rawNumber.startsWith("0o") ? Long.parseLong(number.substring(2), 8) :
+                            rawNumber.startsWith("0b") ? Long.parseLong(number.substring(2), 2) :
+                                Long.parseLong(number);
+            return new Toml.Literal(
+                    randomId(),
+                    prefix,
+                    Markers.EMPTY,
+                    rawNumber,
+                    numberValue
+            );
+        });
+    }
+
+    @Override
+    public Toml visitFloating_point(TomlParser.Floating_pointContext ctx) {
+        return super.visitFloating_point(ctx);
     }
 
     private Space prefix(ParserRuleContext ctx) {

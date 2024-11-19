@@ -166,7 +166,6 @@ public class Space {
                     } else {
                         inSingleLineComment = true;
                         comment.setLength(0);
-                        prefix.setLength(prefix.length() - 1);
                     }
                     break;
                 case '\r':

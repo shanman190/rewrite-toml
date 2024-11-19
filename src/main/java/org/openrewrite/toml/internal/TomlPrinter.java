@@ -20,6 +20,7 @@ import org.openrewrite.PrintOutputCapture;
 import org.openrewrite.marker.Marker;
 import org.openrewrite.marker.Markers;
 import org.openrewrite.toml.TomlVisitor;
+import org.openrewrite.toml.tree.Comment;
 import org.openrewrite.toml.tree.Space;
 import org.openrewrite.toml.tree.Toml;
 import org.openrewrite.toml.tree.TomlRightPadded;
@@ -69,6 +70,10 @@ public class TomlPrinter<P> extends TomlVisitor<PrintOutputCapture<P>> {
     @Override
     public Space visitSpace(Space space, PrintOutputCapture<P> p) {
         p.append(space.getWhitespace());
+        for (Comment comment : space.getComments()) {
+            visitMarkers(comment.getMarkers(), p);
+            p.append("#").append(comment.getText()).append(comment.getSuffix());
+        }
         return space;
     }
 
@@ -84,7 +89,7 @@ public class TomlPrinter<P> extends TomlVisitor<PrintOutputCapture<P>> {
     }
 
     private static final UnaryOperator<String> TOML_MARKER_WRAPPER =
-            out -> "/*~~" + out + (out.isEmpty() ? "" : "~~") + ">*/";
+            out -> "~~" + out + (out.isEmpty() ? "" : "~~") + ">";
 
     protected void beforeSyntax(Toml t, PrintOutputCapture<P> p) {
         beforeSyntax(t.getPrefix(), t.getMarkers(), p);

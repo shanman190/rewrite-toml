@@ -142,7 +142,7 @@ public interface Toml extends Tree {
             return withCharsetName(charset.name());
         }
 
-        List<TomlValue> values;
+        List<Toml> values;
         Space eof;
 
         @Override
