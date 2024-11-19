@@ -60,6 +60,18 @@ class TomlParserTest implements RewriteTest {
             
             # both
             flt7 = 6.626e-34
+            
+            flt8 = 224_617.445_991_228
+            
+            # infinity
+            sf1 = inf  # positive infinity
+            sf2 = +inf # positive infinity
+            sf3 = -inf # negative infinity
+            
+            # not a number
+            sf4 = nan  # actual sNaN/qNaN encoding is implementation-specific
+            sf5 = +nan # sa
+            sf6 = -nan # valid, actual encoding is implementation-specific
             """
           )
         );

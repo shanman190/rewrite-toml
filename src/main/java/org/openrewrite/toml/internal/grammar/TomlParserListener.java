@@ -38,15 +38,15 @@ public interface TomlParserListener extends ParseTreeListener {
 	 */
 	void exitComment(TomlParser.CommentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#key_value}.
+	 * Enter a parse tree produced by {@link TomlParser#keyValue}.
 	 * @param ctx the parse tree
 	 */
-	void enterKey_value(TomlParser.Key_valueContext ctx);
+	void enterKeyValue(TomlParser.KeyValueContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#key_value}.
+	 * Exit a parse tree produced by {@link TomlParser#keyValue}.
 	 * @param ctx the parse tree
 	 */
-	void exitKey_value(TomlParser.Key_valueContext ctx);
+	void exitKeyValue(TomlParser.KeyValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link TomlParser#key}.
 	 * @param ctx the parse tree
@@ -58,45 +58,45 @@ public interface TomlParserListener extends ParseTreeListener {
 	 */
 	void exitKey(TomlParser.KeyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#simple_key}.
+	 * Enter a parse tree produced by {@link TomlParser#simpleKey}.
 	 * @param ctx the parse tree
 	 */
-	void enterSimple_key(TomlParser.Simple_keyContext ctx);
+	void enterSimpleKey(TomlParser.SimpleKeyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#simple_key}.
+	 * Exit a parse tree produced by {@link TomlParser#simpleKey}.
 	 * @param ctx the parse tree
 	 */
-	void exitSimple_key(TomlParser.Simple_keyContext ctx);
+	void exitSimpleKey(TomlParser.SimpleKeyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#unquoted_key}.
+	 * Enter a parse tree produced by {@link TomlParser#unquotedKey}.
 	 * @param ctx the parse tree
 	 */
-	void enterUnquoted_key(TomlParser.Unquoted_keyContext ctx);
+	void enterUnquotedKey(TomlParser.UnquotedKeyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#unquoted_key}.
+	 * Exit a parse tree produced by {@link TomlParser#unquotedKey}.
 	 * @param ctx the parse tree
 	 */
-	void exitUnquoted_key(TomlParser.Unquoted_keyContext ctx);
+	void exitUnquotedKey(TomlParser.UnquotedKeyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#quoted_key}.
+	 * Enter a parse tree produced by {@link TomlParser#quotedKey}.
 	 * @param ctx the parse tree
 	 */
-	void enterQuoted_key(TomlParser.Quoted_keyContext ctx);
+	void enterQuotedKey(TomlParser.QuotedKeyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#quoted_key}.
+	 * Exit a parse tree produced by {@link TomlParser#quotedKey}.
 	 * @param ctx the parse tree
 	 */
-	void exitQuoted_key(TomlParser.Quoted_keyContext ctx);
+	void exitQuotedKey(TomlParser.QuotedKeyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#dotted_key}.
+	 * Enter a parse tree produced by {@link TomlParser#dottedKey}.
 	 * @param ctx the parse tree
 	 */
-	void enterDotted_key(TomlParser.Dotted_keyContext ctx);
+	void enterDottedKey(TomlParser.DottedKeyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#dotted_key}.
+	 * Exit a parse tree produced by {@link TomlParser#dottedKey}.
 	 * @param ctx the parse tree
 	 */
-	void exitDotted_key(TomlParser.Dotted_keyContext ctx);
+	void exitDottedKey(TomlParser.DottedKeyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link TomlParser#value}.
 	 * @param ctx the parse tree
@@ -128,75 +128,75 @@ public interface TomlParserListener extends ParseTreeListener {
 	 */
 	void exitInteger(TomlParser.IntegerContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#floating_point}.
+	 * Enter a parse tree produced by {@link TomlParser#floatingPoint}.
 	 * @param ctx the parse tree
 	 */
-	void enterFloating_point(TomlParser.Floating_pointContext ctx);
+	void enterFloatingPoint(TomlParser.FloatingPointContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#floating_point}.
+	 * Exit a parse tree produced by {@link TomlParser#floatingPoint}.
 	 * @param ctx the parse tree
 	 */
-	void exitFloating_point(TomlParser.Floating_pointContext ctx);
+	void exitFloatingPoint(TomlParser.FloatingPointContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#bool_}.
+	 * Enter a parse tree produced by {@link TomlParser#bool}.
 	 * @param ctx the parse tree
 	 */
-	void enterBool_(TomlParser.Bool_Context ctx);
+	void enterBool(TomlParser.BoolContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#bool_}.
+	 * Exit a parse tree produced by {@link TomlParser#bool}.
 	 * @param ctx the parse tree
 	 */
-	void exitBool_(TomlParser.Bool_Context ctx);
+	void exitBool(TomlParser.BoolContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#date_time}.
+	 * Enter a parse tree produced by {@link TomlParser#dateTime}.
 	 * @param ctx the parse tree
 	 */
-	void enterDate_time(TomlParser.Date_timeContext ctx);
+	void enterDateTime(TomlParser.DateTimeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#date_time}.
+	 * Exit a parse tree produced by {@link TomlParser#dateTime}.
 	 * @param ctx the parse tree
 	 */
-	void exitDate_time(TomlParser.Date_timeContext ctx);
+	void exitDateTime(TomlParser.DateTimeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#array_}.
+	 * Enter a parse tree produced by {@link TomlParser#array}.
 	 * @param ctx the parse tree
 	 */
-	void enterArray_(TomlParser.Array_Context ctx);
+	void enterArray(TomlParser.ArrayContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#array_}.
+	 * Exit a parse tree produced by {@link TomlParser#array}.
 	 * @param ctx the parse tree
 	 */
-	void exitArray_(TomlParser.Array_Context ctx);
+	void exitArray(TomlParser.ArrayContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#array_values}.
+	 * Enter a parse tree produced by {@link TomlParser#arrayValues}.
 	 * @param ctx the parse tree
 	 */
-	void enterArray_values(TomlParser.Array_valuesContext ctx);
+	void enterArrayValues(TomlParser.ArrayValuesContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#array_values}.
+	 * Exit a parse tree produced by {@link TomlParser#arrayValues}.
 	 * @param ctx the parse tree
 	 */
-	void exitArray_values(TomlParser.Array_valuesContext ctx);
+	void exitArrayValues(TomlParser.ArrayValuesContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#comment_or_nl}.
+	 * Enter a parse tree produced by {@link TomlParser#commentOrNl}.
 	 * @param ctx the parse tree
 	 */
-	void enterComment_or_nl(TomlParser.Comment_or_nlContext ctx);
+	void enterCommentOrNl(TomlParser.CommentOrNlContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#comment_or_nl}.
+	 * Exit a parse tree produced by {@link TomlParser#commentOrNl}.
 	 * @param ctx the parse tree
 	 */
-	void exitComment_or_nl(TomlParser.Comment_or_nlContext ctx);
+	void exitCommentOrNl(TomlParser.CommentOrNlContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#nl_or_comment}.
+	 * Enter a parse tree produced by {@link TomlParser#nlOrComment}.
 	 * @param ctx the parse tree
 	 */
-	void enterNl_or_comment(TomlParser.Nl_or_commentContext ctx);
+	void enterNlOrComment(TomlParser.NlOrCommentContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#nl_or_comment}.
+	 * Exit a parse tree produced by {@link TomlParser#nlOrComment}.
 	 * @param ctx the parse tree
 	 */
-	void exitNl_or_comment(TomlParser.Nl_or_commentContext ctx);
+	void exitNlOrComment(TomlParser.NlOrCommentContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link TomlParser#table}.
 	 * @param ctx the parse tree
@@ -208,53 +208,53 @@ public interface TomlParserListener extends ParseTreeListener {
 	 */
 	void exitTable(TomlParser.TableContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#standard_table}.
+	 * Enter a parse tree produced by {@link TomlParser#standardTable}.
 	 * @param ctx the parse tree
 	 */
-	void enterStandard_table(TomlParser.Standard_tableContext ctx);
+	void enterStandardTable(TomlParser.StandardTableContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#standard_table}.
+	 * Exit a parse tree produced by {@link TomlParser#standardTable}.
 	 * @param ctx the parse tree
 	 */
-	void exitStandard_table(TomlParser.Standard_tableContext ctx);
+	void exitStandardTable(TomlParser.StandardTableContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#inline_table}.
+	 * Enter a parse tree produced by {@link TomlParser#inlineTable}.
 	 * @param ctx the parse tree
 	 */
-	void enterInline_table(TomlParser.Inline_tableContext ctx);
+	void enterInlineTable(TomlParser.InlineTableContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#inline_table}.
+	 * Exit a parse tree produced by {@link TomlParser#inlineTable}.
 	 * @param ctx the parse tree
 	 */
-	void exitInline_table(TomlParser.Inline_tableContext ctx);
+	void exitInlineTable(TomlParser.InlineTableContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#inline_table_keyvals}.
+	 * Enter a parse tree produced by {@link TomlParser#inlineTableKeyvals}.
 	 * @param ctx the parse tree
 	 */
-	void enterInline_table_keyvals(TomlParser.Inline_table_keyvalsContext ctx);
+	void enterInlineTableKeyvals(TomlParser.InlineTableKeyvalsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#inline_table_keyvals}.
+	 * Exit a parse tree produced by {@link TomlParser#inlineTableKeyvals}.
 	 * @param ctx the parse tree
 	 */
-	void exitInline_table_keyvals(TomlParser.Inline_table_keyvalsContext ctx);
+	void exitInlineTableKeyvals(TomlParser.InlineTableKeyvalsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#inline_table_keyvals_non_empty}.
+	 * Enter a parse tree produced by {@link TomlParser#inlineTableKeyvalsNonEmpty}.
 	 * @param ctx the parse tree
 	 */
-	void enterInline_table_keyvals_non_empty(TomlParser.Inline_table_keyvals_non_emptyContext ctx);
+	void enterInlineTableKeyvalsNonEmpty(TomlParser.InlineTableKeyvalsNonEmptyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#inline_table_keyvals_non_empty}.
+	 * Exit a parse tree produced by {@link TomlParser#inlineTableKeyvalsNonEmpty}.
 	 * @param ctx the parse tree
 	 */
-	void exitInline_table_keyvals_non_empty(TomlParser.Inline_table_keyvals_non_emptyContext ctx);
+	void exitInlineTableKeyvalsNonEmpty(TomlParser.InlineTableKeyvalsNonEmptyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#array_table}.
+	 * Enter a parse tree produced by {@link TomlParser#arrayTable}.
 	 * @param ctx the parse tree
 	 */
-	void enterArray_table(TomlParser.Array_tableContext ctx);
+	void enterArrayTable(TomlParser.ArrayTableContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TomlParser#array_table}.
+	 * Exit a parse tree produced by {@link TomlParser#arrayTable}.
 	 * @param ctx the parse tree
 	 */
-	void exitArray_table(TomlParser.Array_tableContext ctx);
+	void exitArrayTable(TomlParser.ArrayTableContext ctx);
 }

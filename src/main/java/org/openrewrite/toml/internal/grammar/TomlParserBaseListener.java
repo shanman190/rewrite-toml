@@ -53,13 +53,13 @@ public class TomlParserBaseListener implements TomlParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterKey_value(TomlParser.Key_valueContext ctx) { }
+	@Override public void enterKeyValue(TomlParser.KeyValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitKey_value(TomlParser.Key_valueContext ctx) { }
+	@Override public void exitKeyValue(TomlParser.KeyValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -77,49 +77,49 @@ public class TomlParserBaseListener implements TomlParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSimple_key(TomlParser.Simple_keyContext ctx) { }
+	@Override public void enterSimpleKey(TomlParser.SimpleKeyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSimple_key(TomlParser.Simple_keyContext ctx) { }
+	@Override public void exitSimpleKey(TomlParser.SimpleKeyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUnquoted_key(TomlParser.Unquoted_keyContext ctx) { }
+	@Override public void enterUnquotedKey(TomlParser.UnquotedKeyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUnquoted_key(TomlParser.Unquoted_keyContext ctx) { }
+	@Override public void exitUnquotedKey(TomlParser.UnquotedKeyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterQuoted_key(TomlParser.Quoted_keyContext ctx) { }
+	@Override public void enterQuotedKey(TomlParser.QuotedKeyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitQuoted_key(TomlParser.Quoted_keyContext ctx) { }
+	@Override public void exitQuotedKey(TomlParser.QuotedKeyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDotted_key(TomlParser.Dotted_keyContext ctx) { }
+	@Override public void enterDottedKey(TomlParser.DottedKeyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDotted_key(TomlParser.Dotted_keyContext ctx) { }
+	@Override public void exitDottedKey(TomlParser.DottedKeyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -161,85 +161,85 @@ public class TomlParserBaseListener implements TomlParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFloating_point(TomlParser.Floating_pointContext ctx) { }
+	@Override public void enterFloatingPoint(TomlParser.FloatingPointContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFloating_point(TomlParser.Floating_pointContext ctx) { }
+	@Override public void exitFloatingPoint(TomlParser.FloatingPointContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBool_(TomlParser.Bool_Context ctx) { }
+	@Override public void enterBool(TomlParser.BoolContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBool_(TomlParser.Bool_Context ctx) { }
+	@Override public void exitBool(TomlParser.BoolContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDate_time(TomlParser.Date_timeContext ctx) { }
+	@Override public void enterDateTime(TomlParser.DateTimeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDate_time(TomlParser.Date_timeContext ctx) { }
+	@Override public void exitDateTime(TomlParser.DateTimeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArray_(TomlParser.Array_Context ctx) { }
+	@Override public void enterArray(TomlParser.ArrayContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArray_(TomlParser.Array_Context ctx) { }
+	@Override public void exitArray(TomlParser.ArrayContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArray_values(TomlParser.Array_valuesContext ctx) { }
+	@Override public void enterArrayValues(TomlParser.ArrayValuesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArray_values(TomlParser.Array_valuesContext ctx) { }
+	@Override public void exitArrayValues(TomlParser.ArrayValuesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComment_or_nl(TomlParser.Comment_or_nlContext ctx) { }
+	@Override public void enterCommentOrNl(TomlParser.CommentOrNlContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitComment_or_nl(TomlParser.Comment_or_nlContext ctx) { }
+	@Override public void exitCommentOrNl(TomlParser.CommentOrNlContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNl_or_comment(TomlParser.Nl_or_commentContext ctx) { }
+	@Override public void enterNlOrComment(TomlParser.NlOrCommentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNl_or_comment(TomlParser.Nl_or_commentContext ctx) { }
+	@Override public void exitNlOrComment(TomlParser.NlOrCommentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -257,61 +257,61 @@ public class TomlParserBaseListener implements TomlParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStandard_table(TomlParser.Standard_tableContext ctx) { }
+	@Override public void enterStandardTable(TomlParser.StandardTableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStandard_table(TomlParser.Standard_tableContext ctx) { }
+	@Override public void exitStandardTable(TomlParser.StandardTableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInline_table(TomlParser.Inline_tableContext ctx) { }
+	@Override public void enterInlineTable(TomlParser.InlineTableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInline_table(TomlParser.Inline_tableContext ctx) { }
+	@Override public void exitInlineTable(TomlParser.InlineTableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInline_table_keyvals(TomlParser.Inline_table_keyvalsContext ctx) { }
+	@Override public void enterInlineTableKeyvals(TomlParser.InlineTableKeyvalsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInline_table_keyvals(TomlParser.Inline_table_keyvalsContext ctx) { }
+	@Override public void exitInlineTableKeyvals(TomlParser.InlineTableKeyvalsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInline_table_keyvals_non_empty(TomlParser.Inline_table_keyvals_non_emptyContext ctx) { }
+	@Override public void enterInlineTableKeyvalsNonEmpty(TomlParser.InlineTableKeyvalsNonEmptyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInline_table_keyvals_non_empty(TomlParser.Inline_table_keyvals_non_emptyContext ctx) { }
+	@Override public void exitInlineTableKeyvalsNonEmpty(TomlParser.InlineTableKeyvalsNonEmptyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArray_table(TomlParser.Array_tableContext ctx) { }
+	@Override public void enterArrayTable(TomlParser.ArrayTableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArray_table(TomlParser.Array_tableContext ctx) { }
+	@Override public void exitArrayTable(TomlParser.ArrayTableContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

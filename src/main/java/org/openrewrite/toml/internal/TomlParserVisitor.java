@@ -18,6 +18,12 @@ import org.openrewrite.toml.tree.TomlRightPadded;
 
 import java.nio.charset.Charset;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -117,7 +123,7 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
     }
 
     @Override
-    public Toml.KeyValue visitKey_value(TomlParser.Key_valueContext ctx) {
+    public Toml.KeyValue visitKeyValue(TomlParser.KeyValueContext ctx) {
         return convert(ctx, (c, prefix) -> new Toml.KeyValue(
                 randomId(),
                 prefix,
@@ -161,8 +167,106 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
     }
 
     @Override
-    public Toml visitFloating_point(TomlParser.Floating_pointContext ctx) {
-        return super.visitFloating_point(ctx);
+    public Toml visitFloatingPoint(TomlParser.FloatingPointContext ctx) {
+        return convert(ctx, (c, prefix) -> {
+            String rawNumber = c.getText();
+            if (c.NAN() != null) {
+                return new Toml.Literal(
+                        randomId(),
+                        prefix,
+                        Markers.EMPTY,
+                        rawNumber,
+                        "nan"
+                );
+            } else if (c.INF() != null) {
+                return new Toml.Literal(
+                        randomId(),
+                        prefix,
+                        Markers.EMPTY,
+                        rawNumber,
+                        "inf"
+                );
+            }
+
+            String number = rawNumber.replace("_", "");
+            Float numberValue = Float.parseFloat(number);
+            return new Toml.Literal(
+                    randomId(),
+                    prefix,
+                    Markers.EMPTY,
+                    rawNumber,
+                    numberValue
+            );
+        });
+    }
+
+    @Override
+    public Toml visitBool(TomlParser.BoolContext ctx) {
+        return convert(ctx, (c, prefix) -> {
+            String bool = c.getText();
+            Boolean boolValue = Boolean.parseBoolean(bool);
+            return new Toml.Literal(
+                    randomId(),
+                    prefix,
+                    Markers.EMPTY,
+                    bool,
+                    boolValue
+            );
+        });
+    }
+
+    private static final DateTimeFormatter RFC3339_OFFSET_DATE_TIME;
+
+    static {
+        RFC3339_OFFSET_DATE_TIME = new DateTimeFormatterBuilder()
+                .parseCaseInsensitive()
+                .append(DateTimeFormatter.ISO_LOCAL_DATE)
+                .appendLiteral(' ')
+                .append(DateTimeFormatter.ISO_LOCAL_TIME)
+                .parseLenient()
+                .appendOffsetId()
+                .parseStrict()
+                .toFormatter();
+    }
+
+    @Override
+    public Toml visitDateTime(TomlParser.DateTimeContext ctx) {
+        return convert(ctx, (c, prefix) -> {
+            String dateTime = c.getText();
+            if (c.OFFSET_DATE_TIME() != null) {
+                return new Toml.Literal(
+                        randomId(),
+                        prefix,
+                        Markers.EMPTY,
+                        dateTime,
+                        dateTime.contains("T") ? OffsetDateTime.parse(dateTime) : OffsetDateTime.parse(dateTime, RFC3339_OFFSET_DATE_TIME)
+                );
+            } else if (c.LOCAL_DATE_TIME() != null) {
+                return new Toml.Literal(
+                        randomId(),
+                        prefix,
+                        Markers.EMPTY,
+                        dateTime,
+                        LocalDateTime.parse(dateTime)
+                );
+            } else if (c.LOCAL_DATE() != null) {
+                return new Toml.Literal(
+                        randomId(),
+                        prefix,
+                        Markers.EMPTY,
+                        dateTime,
+                        LocalDate.parse(dateTime)
+                );
+            }
+
+            return new Toml.Literal(
+                    randomId(),
+                    prefix,
+                    Markers.EMPTY,
+                    dateTime,
+                    LocalTime.parse(dateTime)
+            );
+        });
     }
 
     private Space prefix(ParserRuleContext ctx) {

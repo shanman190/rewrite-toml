@@ -28,20 +28,20 @@ public class TomlParser extends Parser {
 		OFFSET_DATE_TIME=26, LOCAL_DATE_TIME=27, LOCAL_DATE=28, LOCAL_TIME=29,
 		INLINE_TABLE_WS=30, R_BRACE=31, ARRAY_WS=32;
 	public static final int
-		RULE_document = 0, RULE_expression = 1, RULE_comment = 2, RULE_key_value = 3,
-		RULE_key = 4, RULE_simple_key = 5, RULE_unquoted_key = 6, RULE_quoted_key = 7,
-		RULE_dotted_key = 8, RULE_value = 9, RULE_string = 10, RULE_integer = 11,
-		RULE_floating_point = 12, RULE_bool_ = 13, RULE_date_time = 14, RULE_array_ = 15,
-		RULE_array_values = 16, RULE_comment_or_nl = 17, RULE_nl_or_comment = 18,
-		RULE_table = 19, RULE_standard_table = 20, RULE_inline_table = 21, RULE_inline_table_keyvals = 22,
-		RULE_inline_table_keyvals_non_empty = 23, RULE_array_table = 24;
+		RULE_document = 0, RULE_expression = 1, RULE_comment = 2, RULE_keyValue = 3,
+		RULE_key = 4, RULE_simpleKey = 5, RULE_unquotedKey = 6, RULE_quotedKey = 7,
+		RULE_dottedKey = 8, RULE_value = 9, RULE_string = 10, RULE_integer = 11,
+		RULE_floatingPoint = 12, RULE_bool = 13, RULE_dateTime = 14, RULE_array = 15,
+		RULE_arrayValues = 16, RULE_commentOrNl = 17, RULE_nlOrComment = 18, RULE_table = 19,
+		RULE_standardTable = 20, RULE_inlineTable = 21, RULE_inlineTableKeyvals = 22,
+		RULE_inlineTableKeyvalsNonEmpty = 23, RULE_arrayTable = 24;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"document", "expression", "comment", "key_value", "key", "simple_key",
-			"unquoted_key", "quoted_key", "dotted_key", "value", "string", "integer",
-			"floating_point", "bool_", "date_time", "array_", "array_values", "comment_or_nl",
-			"nl_or_comment", "table", "standard_table", "inline_table", "inline_table_keyvals",
-			"inline_table_keyvals_non_empty", "array_table"
+			"document", "expression", "comment", "keyValue", "key", "simpleKey",
+			"unquotedKey", "quotedKey", "dottedKey", "value", "string", "integer",
+			"floatingPoint", "bool", "dateTime", "array", "arrayValues", "commentOrNl",
+			"nlOrComment", "table", "standardTable", "inlineTable", "inlineTableKeyvals",
+			"inlineTableKeyvalsNonEmpty", "arrayTable"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -189,8 +189,8 @@ public class TomlParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionContext extends ParserRuleContext {
-		public Key_valueContext key_value() {
-			return getRuleContext(Key_valueContext.class,0);
+		public KeyValueContext keyValue() {
+			return getRuleContext(KeyValueContext.class,0);
 		}
 		public CommentContext comment() {
 			return getRuleContext(CommentContext.class,0);
@@ -230,7 +230,7 @@ public class TomlParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(60);
-				key_value();
+				keyValue();
 				setState(61);
 				comment();
 				}
@@ -322,7 +322,7 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Key_valueContext extends ParserRuleContext {
+	public static class KeyValueContext extends ParserRuleContext {
 		public KeyContext key() {
 			return getRuleContext(KeyContext.class,0);
 		}
@@ -330,28 +330,28 @@ public class TomlParser extends Parser {
 		public ValueContext value() {
 			return getRuleContext(ValueContext.class,0);
 		}
-		public Key_valueContext(ParserRuleContext parent, int invokingState) {
+		public KeyValueContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_key_value; }
+		@Override public int getRuleIndex() { return RULE_keyValue; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterKey_value(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterKeyValue(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitKey_value(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitKeyValue(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitKey_value(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitKeyValue(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Key_valueContext key_value() throws RecognitionException {
-		Key_valueContext _localctx = new Key_valueContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_key_value);
+	public final KeyValueContext keyValue() throws RecognitionException {
+		KeyValueContext _localctx = new KeyValueContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_keyValue);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -376,11 +376,11 @@ public class TomlParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class KeyContext extends ParserRuleContext {
-		public Simple_keyContext simple_key() {
-			return getRuleContext(Simple_keyContext.class,0);
+		public SimpleKeyContext simpleKey() {
+			return getRuleContext(SimpleKeyContext.class,0);
 		}
-		public Dotted_keyContext dotted_key() {
-			return getRuleContext(Dotted_keyContext.class,0);
+		public DottedKeyContext dottedKey() {
+			return getRuleContext(DottedKeyContext.class,0);
 		}
 		public KeyContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -412,14 +412,14 @@ public class TomlParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(76);
-				simple_key();
+				simpleKey();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(77);
-				dotted_key();
+				dottedKey();
 				}
 				break;
 			}
@@ -436,35 +436,35 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Simple_keyContext extends ParserRuleContext {
-		public Quoted_keyContext quoted_key() {
-			return getRuleContext(Quoted_keyContext.class,0);
+	public static class SimpleKeyContext extends ParserRuleContext {
+		public QuotedKeyContext quotedKey() {
+			return getRuleContext(QuotedKeyContext.class,0);
 		}
-		public Unquoted_keyContext unquoted_key() {
-			return getRuleContext(Unquoted_keyContext.class,0);
+		public UnquotedKeyContext unquotedKey() {
+			return getRuleContext(UnquotedKeyContext.class,0);
 		}
-		public Simple_keyContext(ParserRuleContext parent, int invokingState) {
+		public SimpleKeyContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_simple_key; }
+		@Override public int getRuleIndex() { return RULE_simpleKey; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterSimple_key(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterSimpleKey(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitSimple_key(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitSimpleKey(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitSimple_key(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitSimpleKey(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Simple_keyContext simple_key() throws RecognitionException {
-		Simple_keyContext _localctx = new Simple_keyContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_simple_key);
+	public final SimpleKeyContext simpleKey() throws RecognitionException {
+		SimpleKeyContext _localctx = new SimpleKeyContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_simpleKey);
 		try {
 			setState(82);
 			_errHandler.sync(this);
@@ -474,14 +474,14 @@ public class TomlParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(80);
-				quoted_key();
+				quotedKey();
 				}
 				break;
 			case UNQUOTED_KEY:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(81);
-				unquoted_key();
+				unquotedKey();
 				}
 				break;
 			default:
@@ -500,30 +500,30 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Unquoted_keyContext extends ParserRuleContext {
+	public static class UnquotedKeyContext extends ParserRuleContext {
 		public TerminalNode UNQUOTED_KEY() { return getToken(TomlParser.UNQUOTED_KEY, 0); }
-		public Unquoted_keyContext(ParserRuleContext parent, int invokingState) {
+		public UnquotedKeyContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_unquoted_key; }
+		@Override public int getRuleIndex() { return RULE_unquotedKey; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterUnquoted_key(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterUnquotedKey(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitUnquoted_key(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitUnquotedKey(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitUnquoted_key(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitUnquotedKey(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Unquoted_keyContext unquoted_key() throws RecognitionException {
-		Unquoted_keyContext _localctx = new Unquoted_keyContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_unquoted_key);
+	public final UnquotedKeyContext unquotedKey() throws RecognitionException {
+		UnquotedKeyContext _localctx = new UnquotedKeyContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_unquotedKey);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -543,31 +543,31 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Quoted_keyContext extends ParserRuleContext {
+	public static class QuotedKeyContext extends ParserRuleContext {
 		public TerminalNode BASIC_STRING() { return getToken(TomlParser.BASIC_STRING, 0); }
 		public TerminalNode LITERAL_STRING() { return getToken(TomlParser.LITERAL_STRING, 0); }
-		public Quoted_keyContext(ParserRuleContext parent, int invokingState) {
+		public QuotedKeyContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_quoted_key; }
+		@Override public int getRuleIndex() { return RULE_quotedKey; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterQuoted_key(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterQuotedKey(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitQuoted_key(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitQuotedKey(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitQuoted_key(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitQuotedKey(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Quoted_keyContext quoted_key() throws RecognitionException {
-		Quoted_keyContext _localctx = new Quoted_keyContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_quoted_key);
+	public final QuotedKeyContext quotedKey() throws RecognitionException {
+		QuotedKeyContext _localctx = new QuotedKeyContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_quotedKey);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -596,45 +596,45 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Dotted_keyContext extends ParserRuleContext {
-		public List<Simple_keyContext> simple_key() {
-			return getRuleContexts(Simple_keyContext.class);
+	public static class DottedKeyContext extends ParserRuleContext {
+		public List<SimpleKeyContext> simpleKey() {
+			return getRuleContexts(SimpleKeyContext.class);
 		}
-		public Simple_keyContext simple_key(int i) {
-			return getRuleContext(Simple_keyContext.class,i);
+		public SimpleKeyContext simpleKey(int i) {
+			return getRuleContext(SimpleKeyContext.class,i);
 		}
 		public List<TerminalNode> DOT() { return getTokens(TomlParser.DOT); }
 		public TerminalNode DOT(int i) {
 			return getToken(TomlParser.DOT, i);
 		}
-		public Dotted_keyContext(ParserRuleContext parent, int invokingState) {
+		public DottedKeyContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_dotted_key; }
+		@Override public int getRuleIndex() { return RULE_dottedKey; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterDotted_key(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterDottedKey(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitDotted_key(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitDottedKey(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitDotted_key(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitDottedKey(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Dotted_keyContext dotted_key() throws RecognitionException {
-		Dotted_keyContext _localctx = new Dotted_keyContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_dotted_key);
+	public final DottedKeyContext dottedKey() throws RecognitionException {
+		DottedKeyContext _localctx = new DottedKeyContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_dottedKey);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(88);
-			simple_key();
+			simpleKey();
 			setState(91);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -644,7 +644,7 @@ public class TomlParser extends Parser {
 				setState(89);
 				match(DOT);
 				setState(90);
-				simple_key();
+				simpleKey();
 				}
 				}
 				setState(93);
@@ -672,20 +672,20 @@ public class TomlParser extends Parser {
 		public IntegerContext integer() {
 			return getRuleContext(IntegerContext.class,0);
 		}
-		public Floating_pointContext floating_point() {
-			return getRuleContext(Floating_pointContext.class,0);
+		public FloatingPointContext floatingPoint() {
+			return getRuleContext(FloatingPointContext.class,0);
 		}
-		public Bool_Context bool_() {
-			return getRuleContext(Bool_Context.class,0);
+		public BoolContext bool() {
+			return getRuleContext(BoolContext.class,0);
 		}
-		public Date_timeContext date_time() {
-			return getRuleContext(Date_timeContext.class,0);
+		public DateTimeContext dateTime() {
+			return getRuleContext(DateTimeContext.class,0);
 		}
-		public Array_Context array_() {
-			return getRuleContext(Array_Context.class,0);
+		public ArrayContext array() {
+			return getRuleContext(ArrayContext.class,0);
 		}
-		public Inline_tableContext inline_table() {
-			return getRuleContext(Inline_tableContext.class,0);
+		public InlineTableContext inlineTable() {
+			return getRuleContext(InlineTableContext.class,0);
 		}
 		public ValueContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -739,14 +739,14 @@ public class TomlParser extends Parser {
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(97);
-				floating_point();
+				floatingPoint();
 				}
 				break;
 			case BOOLEAN:
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(98);
-				bool_();
+				bool();
 				}
 				break;
 			case OFFSET_DATE_TIME:
@@ -756,21 +756,21 @@ public class TomlParser extends Parser {
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(99);
-				date_time();
+				dateTime();
 				}
 				break;
 			case L_BRACKET:
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(100);
-				array_();
+				array();
 				}
 				break;
 			case L_BRACE:
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(101);
-				inline_table();
+				inlineTable();
 				}
 				break;
 			default:
@@ -899,32 +899,32 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Floating_pointContext extends ParserRuleContext {
+	public static class FloatingPointContext extends ParserRuleContext {
 		public TerminalNode FLOAT() { return getToken(TomlParser.FLOAT, 0); }
 		public TerminalNode INF() { return getToken(TomlParser.INF, 0); }
 		public TerminalNode NAN() { return getToken(TomlParser.NAN, 0); }
-		public Floating_pointContext(ParserRuleContext parent, int invokingState) {
+		public FloatingPointContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_floating_point; }
+		@Override public int getRuleIndex() { return RULE_floatingPoint; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterFloating_point(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterFloatingPoint(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitFloating_point(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitFloatingPoint(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitFloating_point(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitFloatingPoint(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Floating_pointContext floating_point() throws RecognitionException {
-		Floating_pointContext _localctx = new Floating_pointContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_floating_point);
+	public final FloatingPointContext floatingPoint() throws RecognitionException {
+		FloatingPointContext _localctx = new FloatingPointContext(_ctx, getState());
+		enterRule(_localctx, 24, RULE_floatingPoint);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -953,30 +953,30 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Bool_Context extends ParserRuleContext {
+	public static class BoolContext extends ParserRuleContext {
 		public TerminalNode BOOLEAN() { return getToken(TomlParser.BOOLEAN, 0); }
-		public Bool_Context(ParserRuleContext parent, int invokingState) {
+		public BoolContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_bool_; }
+		@Override public int getRuleIndex() { return RULE_bool; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterBool_(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterBool(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitBool_(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitBool(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitBool_(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitBool(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Bool_Context bool_() throws RecognitionException {
-		Bool_Context _localctx = new Bool_Context(_ctx, getState());
-		enterRule(_localctx, 26, RULE_bool_);
+	public final BoolContext bool() throws RecognitionException {
+		BoolContext _localctx = new BoolContext(_ctx, getState());
+		enterRule(_localctx, 26, RULE_bool);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -996,33 +996,33 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Date_timeContext extends ParserRuleContext {
+	public static class DateTimeContext extends ParserRuleContext {
 		public TerminalNode OFFSET_DATE_TIME() { return getToken(TomlParser.OFFSET_DATE_TIME, 0); }
 		public TerminalNode LOCAL_DATE_TIME() { return getToken(TomlParser.LOCAL_DATE_TIME, 0); }
 		public TerminalNode LOCAL_DATE() { return getToken(TomlParser.LOCAL_DATE, 0); }
 		public TerminalNode LOCAL_TIME() { return getToken(TomlParser.LOCAL_TIME, 0); }
-		public Date_timeContext(ParserRuleContext parent, int invokingState) {
+		public DateTimeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_date_time; }
+		@Override public int getRuleIndex() { return RULE_dateTime; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterDate_time(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterDateTime(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitDate_time(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitDateTime(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitDate_time(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitDateTime(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Date_timeContext date_time() throws RecognitionException {
-		Date_timeContext _localctx = new Date_timeContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_date_time);
+	public final DateTimeContext dateTime() throws RecognitionException {
+		DateTimeContext _localctx = new DateTimeContext(_ctx, getState());
+		enterRule(_localctx, 28, RULE_dateTime);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -1051,37 +1051,37 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Array_Context extends ParserRuleContext {
+	public static class ArrayContext extends ParserRuleContext {
 		public TerminalNode L_BRACKET() { return getToken(TomlParser.L_BRACKET, 0); }
-		public Comment_or_nlContext comment_or_nl() {
-			return getRuleContext(Comment_or_nlContext.class,0);
+		public CommentOrNlContext commentOrNl() {
+			return getRuleContext(CommentOrNlContext.class,0);
 		}
 		public TerminalNode R_BRACKET() { return getToken(TomlParser.R_BRACKET, 0); }
-		public Array_valuesContext array_values() {
-			return getRuleContext(Array_valuesContext.class,0);
+		public ArrayValuesContext arrayValues() {
+			return getRuleContext(ArrayValuesContext.class,0);
 		}
-		public Array_Context(ParserRuleContext parent, int invokingState) {
+		public ArrayContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_array_; }
+		@Override public int getRuleIndex() { return RULE_array; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterArray_(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterArray(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitArray_(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitArray(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitArray_(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitArray(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Array_Context array_() throws RecognitionException {
-		Array_Context _localctx = new Array_Context(_ctx, getState());
-		enterRule(_localctx, 30, RULE_array_);
+	public final ArrayContext array() throws RecognitionException {
+		ArrayContext _localctx = new ArrayContext(_ctx, getState());
+		enterRule(_localctx, 30, RULE_array);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -1093,12 +1093,12 @@ public class TomlParser extends Parser {
 			case 1:
 				{
 				setState(115);
-				array_values();
+				arrayValues();
 				}
 				break;
 			}
 			setState(118);
-			comment_or_nl();
+			commentOrNl();
 			setState(119);
 			match(R_BRACKET);
 			}
@@ -1115,45 +1115,45 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Array_valuesContext extends ParserRuleContext {
-		public List<Comment_or_nlContext> comment_or_nl() {
-			return getRuleContexts(Comment_or_nlContext.class);
+	public static class ArrayValuesContext extends ParserRuleContext {
+		public List<CommentOrNlContext> commentOrNl() {
+			return getRuleContexts(CommentOrNlContext.class);
 		}
-		public Comment_or_nlContext comment_or_nl(int i) {
-			return getRuleContext(Comment_or_nlContext.class,i);
+		public CommentOrNlContext commentOrNl(int i) {
+			return getRuleContext(CommentOrNlContext.class,i);
 		}
 		public ValueContext value() {
 			return getRuleContext(ValueContext.class,0);
 		}
-		public Nl_or_commentContext nl_or_comment() {
-			return getRuleContext(Nl_or_commentContext.class,0);
+		public NlOrCommentContext nlOrComment() {
+			return getRuleContext(NlOrCommentContext.class,0);
 		}
 		public TerminalNode COMMA() { return getToken(TomlParser.COMMA, 0); }
-		public Array_valuesContext array_values() {
-			return getRuleContext(Array_valuesContext.class,0);
+		public ArrayValuesContext arrayValues() {
+			return getRuleContext(ArrayValuesContext.class,0);
 		}
-		public Array_valuesContext(ParserRuleContext parent, int invokingState) {
+		public ArrayValuesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_array_values; }
+		@Override public int getRuleIndex() { return RULE_arrayValues; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterArray_values(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterArrayValues(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitArray_values(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitArrayValues(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitArray_values(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitArrayValues(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Array_valuesContext array_values() throws RecognitionException {
-		Array_valuesContext _localctx = new Array_valuesContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_array_values);
+	public final ArrayValuesContext arrayValues() throws RecognitionException {
+		ArrayValuesContext _localctx = new ArrayValuesContext(_ctx, getState());
+		enterRule(_localctx, 32, RULE_arrayValues);
 		int _la;
 		try {
 			setState(134);
@@ -1164,17 +1164,17 @@ public class TomlParser extends Parser {
 				{
 				{
 				setState(121);
-				comment_or_nl();
+				commentOrNl();
 				setState(122);
 				value();
 				setState(123);
-				nl_or_comment();
+				nlOrComment();
 				setState(124);
 				match(COMMA);
 				setState(125);
-				array_values();
+				arrayValues();
 				setState(126);
-				comment_or_nl();
+				commentOrNl();
 				}
 				}
 				break;
@@ -1182,11 +1182,11 @@ public class TomlParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(128);
-				comment_or_nl();
+				commentOrNl();
 				setState(129);
 				value();
 				setState(130);
-				nl_or_comment();
+				nlOrComment();
 				setState(132);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -1213,7 +1213,7 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Comment_or_nlContext extends ParserRuleContext {
+	public static class CommentOrNlContext extends ParserRuleContext {
 		public List<TerminalNode> NL() { return getTokens(TomlParser.NL); }
 		public TerminalNode NL(int i) {
 			return getToken(TomlParser.NL, i);
@@ -1222,28 +1222,28 @@ public class TomlParser extends Parser {
 		public TerminalNode COMMENT(int i) {
 			return getToken(TomlParser.COMMENT, i);
 		}
-		public Comment_or_nlContext(ParserRuleContext parent, int invokingState) {
+		public CommentOrNlContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_comment_or_nl; }
+		@Override public int getRuleIndex() { return RULE_commentOrNl; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterComment_or_nl(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterCommentOrNl(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitComment_or_nl(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitCommentOrNl(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitComment_or_nl(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitCommentOrNl(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Comment_or_nlContext comment_or_nl() throws RecognitionException {
-		Comment_or_nlContext _localctx = new Comment_or_nlContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_comment_or_nl);
+	public final CommentOrNlContext commentOrNl() throws RecognitionException {
+		CommentOrNlContext _localctx = new CommentOrNlContext(_ctx, getState());
+		enterRule(_localctx, 34, RULE_commentOrNl);
 		int _la;
 		try {
 			int _alt;
@@ -1289,7 +1289,7 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Nl_or_commentContext extends ParserRuleContext {
+	public static class NlOrCommentContext extends ParserRuleContext {
 		public List<TerminalNode> NL() { return getTokens(TomlParser.NL); }
 		public TerminalNode NL(int i) {
 			return getToken(TomlParser.NL, i);
@@ -1298,28 +1298,28 @@ public class TomlParser extends Parser {
 		public TerminalNode COMMENT(int i) {
 			return getToken(TomlParser.COMMENT, i);
 		}
-		public Nl_or_commentContext(ParserRuleContext parent, int invokingState) {
+		public NlOrCommentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_nl_or_comment; }
+		@Override public int getRuleIndex() { return RULE_nlOrComment; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterNl_or_comment(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterNlOrComment(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitNl_or_comment(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitNlOrComment(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitNl_or_comment(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitNlOrComment(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Nl_or_commentContext nl_or_comment() throws RecognitionException {
-		Nl_or_commentContext _localctx = new Nl_or_commentContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_nl_or_comment);
+	public final NlOrCommentContext nlOrComment() throws RecognitionException {
+		NlOrCommentContext _localctx = new NlOrCommentContext(_ctx, getState());
+		enterRule(_localctx, 36, RULE_nlOrComment);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
@@ -1365,11 +1365,11 @@ public class TomlParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class TableContext extends ParserRuleContext {
-		public Standard_tableContext standard_table() {
-			return getRuleContext(Standard_tableContext.class,0);
+		public StandardTableContext standardTable() {
+			return getRuleContext(StandardTableContext.class,0);
 		}
-		public Array_tableContext array_table() {
-			return getRuleContext(Array_tableContext.class,0);
+		public ArrayTableContext arrayTable() {
+			return getRuleContext(ArrayTableContext.class,0);
 		}
 		public TableContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1401,14 +1401,14 @@ public class TomlParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(154);
-				standard_table();
+				standardTable();
 				}
 				break;
 			case DOUBLE_L_BRACKET:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(155);
-				array_table();
+				arrayTable();
 				}
 				break;
 			default:
@@ -1427,34 +1427,34 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Standard_tableContext extends ParserRuleContext {
+	public static class StandardTableContext extends ParserRuleContext {
 		public TerminalNode L_BRACKET() { return getToken(TomlParser.L_BRACKET, 0); }
 		public KeyContext key() {
 			return getRuleContext(KeyContext.class,0);
 		}
 		public TerminalNode R_BRACKET() { return getToken(TomlParser.R_BRACKET, 0); }
-		public Standard_tableContext(ParserRuleContext parent, int invokingState) {
+		public StandardTableContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_standard_table; }
+		@Override public int getRuleIndex() { return RULE_standardTable; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterStandard_table(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterStandardTable(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitStandard_table(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitStandardTable(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitStandard_table(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitStandardTable(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Standard_tableContext standard_table() throws RecognitionException {
-		Standard_tableContext _localctx = new Standard_tableContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_standard_table);
+	public final StandardTableContext standardTable() throws RecognitionException {
+		StandardTableContext _localctx = new StandardTableContext(_ctx, getState());
+		enterRule(_localctx, 40, RULE_standardTable);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -1478,41 +1478,41 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Inline_tableContext extends ParserRuleContext {
+	public static class InlineTableContext extends ParserRuleContext {
 		public TerminalNode L_BRACE() { return getToken(TomlParser.L_BRACE, 0); }
-		public Inline_table_keyvalsContext inline_table_keyvals() {
-			return getRuleContext(Inline_table_keyvalsContext.class,0);
+		public InlineTableKeyvalsContext inlineTableKeyvals() {
+			return getRuleContext(InlineTableKeyvalsContext.class,0);
 		}
 		public TerminalNode R_BRACE() { return getToken(TomlParser.R_BRACE, 0); }
-		public Inline_tableContext(ParserRuleContext parent, int invokingState) {
+		public InlineTableContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_inline_table; }
+		@Override public int getRuleIndex() { return RULE_inlineTable; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterInline_table(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterInlineTable(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitInline_table(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitInlineTable(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitInline_table(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitInlineTable(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Inline_tableContext inline_table() throws RecognitionException {
-		Inline_tableContext _localctx = new Inline_tableContext(_ctx, getState());
-		enterRule(_localctx, 42, RULE_inline_table);
+	public final InlineTableContext inlineTable() throws RecognitionException {
+		InlineTableContext _localctx = new InlineTableContext(_ctx, getState());
+		enterRule(_localctx, 42, RULE_inlineTable);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(162);
 			match(L_BRACE);
 			setState(163);
-			inline_table_keyvals();
+			inlineTableKeyvals();
 			setState(164);
 			match(R_BRACE);
 			}
@@ -1529,32 +1529,32 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Inline_table_keyvalsContext extends ParserRuleContext {
-		public Inline_table_keyvals_non_emptyContext inline_table_keyvals_non_empty() {
-			return getRuleContext(Inline_table_keyvals_non_emptyContext.class,0);
+	public static class InlineTableKeyvalsContext extends ParserRuleContext {
+		public InlineTableKeyvalsNonEmptyContext inlineTableKeyvalsNonEmpty() {
+			return getRuleContext(InlineTableKeyvalsNonEmptyContext.class,0);
 		}
-		public Inline_table_keyvalsContext(ParserRuleContext parent, int invokingState) {
+		public InlineTableKeyvalsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_inline_table_keyvals; }
+		@Override public int getRuleIndex() { return RULE_inlineTableKeyvals; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterInline_table_keyvals(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterInlineTableKeyvals(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitInline_table_keyvals(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitInlineTableKeyvals(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitInline_table_keyvals(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitInlineTableKeyvals(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Inline_table_keyvalsContext inline_table_keyvals() throws RecognitionException {
-		Inline_table_keyvalsContext _localctx = new Inline_table_keyvalsContext(_ctx, getState());
-		enterRule(_localctx, 44, RULE_inline_table_keyvals);
+	public final InlineTableKeyvalsContext inlineTableKeyvals() throws RecognitionException {
+		InlineTableKeyvalsContext _localctx = new InlineTableKeyvalsContext(_ctx, getState());
+		enterRule(_localctx, 44, RULE_inlineTableKeyvals);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -1565,7 +1565,7 @@ public class TomlParser extends Parser {
 			if (((_la) & ~0x3f) == 0 && ((1L << _la) & 14336L) != 0) {
 				{
 				setState(166);
-				inline_table_keyvals_non_empty();
+				inlineTableKeyvalsNonEmpty();
 				}
 			}
 
@@ -1583,7 +1583,7 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Inline_table_keyvals_non_emptyContext extends ParserRuleContext {
+	public static class InlineTableKeyvalsNonEmptyContext extends ParserRuleContext {
 		public KeyContext key() {
 			return getRuleContext(KeyContext.class,0);
 		}
@@ -1592,31 +1592,31 @@ public class TomlParser extends Parser {
 			return getRuleContext(ValueContext.class,0);
 		}
 		public TerminalNode COMMA() { return getToken(TomlParser.COMMA, 0); }
-		public Inline_table_keyvals_non_emptyContext inline_table_keyvals_non_empty() {
-			return getRuleContext(Inline_table_keyvals_non_emptyContext.class,0);
+		public InlineTableKeyvalsNonEmptyContext inlineTableKeyvalsNonEmpty() {
+			return getRuleContext(InlineTableKeyvalsNonEmptyContext.class,0);
 		}
-		public Inline_table_keyvals_non_emptyContext(ParserRuleContext parent, int invokingState) {
+		public InlineTableKeyvalsNonEmptyContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_inline_table_keyvals_non_empty; }
+		@Override public int getRuleIndex() { return RULE_inlineTableKeyvalsNonEmpty; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterInline_table_keyvals_non_empty(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterInlineTableKeyvalsNonEmpty(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitInline_table_keyvals_non_empty(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitInlineTableKeyvalsNonEmpty(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitInline_table_keyvals_non_empty(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitInlineTableKeyvalsNonEmpty(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Inline_table_keyvals_non_emptyContext inline_table_keyvals_non_empty() throws RecognitionException {
-		Inline_table_keyvals_non_emptyContext _localctx = new Inline_table_keyvals_non_emptyContext(_ctx, getState());
-		enterRule(_localctx, 46, RULE_inline_table_keyvals_non_empty);
+	public final InlineTableKeyvalsNonEmptyContext inlineTableKeyvalsNonEmpty() throws RecognitionException {
+		InlineTableKeyvalsNonEmptyContext _localctx = new InlineTableKeyvalsNonEmptyContext(_ctx, getState());
+		enterRule(_localctx, 46, RULE_inlineTableKeyvalsNonEmpty);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -1635,7 +1635,7 @@ public class TomlParser extends Parser {
 				setState(172);
 				match(COMMA);
 				setState(173);
-				inline_table_keyvals_non_empty();
+				inlineTableKeyvalsNonEmpty();
 				}
 			}
 
@@ -1653,34 +1653,34 @@ public class TomlParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Array_tableContext extends ParserRuleContext {
+	public static class ArrayTableContext extends ParserRuleContext {
 		public TerminalNode DOUBLE_L_BRACKET() { return getToken(TomlParser.DOUBLE_L_BRACKET, 0); }
 		public KeyContext key() {
 			return getRuleContext(KeyContext.class,0);
 		}
 		public TerminalNode DOUBLE_R_BRACKET() { return getToken(TomlParser.DOUBLE_R_BRACKET, 0); }
-		public Array_tableContext(ParserRuleContext parent, int invokingState) {
+		public ArrayTableContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_array_table; }
+		@Override public int getRuleIndex() { return RULE_arrayTable; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterArray_table(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).enterArrayTable(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitArray_table(this);
+			if ( listener instanceof TomlParserListener ) ((TomlParserListener)listener).exitArrayTable(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitArray_table(this);
+			if ( visitor instanceof TomlParserVisitor ) return ((TomlParserVisitor<? extends T>)visitor).visitArrayTable(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Array_tableContext array_table() throws RecognitionException {
-		Array_tableContext _localctx = new Array_tableContext(_ctx, getState());
-		enterRule(_localctx, 48, RULE_array_table);
+	public final ArrayTableContext arrayTable() throws RecognitionException {
+		ArrayTableContext _localctx = new ArrayTableContext(_ctx, getState());
+		enterRule(_localctx, 48, RULE_arrayTable);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{

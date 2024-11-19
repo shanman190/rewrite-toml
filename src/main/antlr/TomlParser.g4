@@ -31,7 +31,7 @@ document
     ;
 
 expression
-    : key_value comment
+    : keyValue comment
     | table comment
     | comment
     ;
@@ -40,41 +40,41 @@ comment
     : COMMENT?
     ;
 
-key_value
+keyValue
     : key EQUALS value
     ;
 
 key
-    : simple_key
-    | dotted_key
+    : simpleKey
+    | dottedKey
     ;
 
-simple_key
-    : quoted_key
-    | unquoted_key
+simpleKey
+    : quotedKey
+    | unquotedKey
     ;
 
-unquoted_key
+unquotedKey
     : UNQUOTED_KEY
     ;
 
-quoted_key
+quotedKey
     : BASIC_STRING
     | LITERAL_STRING
     ;
 
-dotted_key
-    : simple_key (DOT simple_key)+
+dottedKey
+    : simpleKey (DOT simpleKey)+
     ;
 
 value
     : string
     | integer
-    | floating_point
-    | bool_
-    | date_time
-    | array_
-    | inline_table
+    | floatingPoint
+    | bool
+    | dateTime
+    | array
+    | inlineTable
     ;
 
 string
@@ -91,61 +91,61 @@ integer
     | BIN_INT
     ;
 
-floating_point
+floatingPoint
     : FLOAT
     | INF
     | NAN
     ;
 
-bool_
+bool
     : BOOLEAN
     ;
 
-date_time
+dateTime
     : OFFSET_DATE_TIME
     | LOCAL_DATE_TIME
     | LOCAL_DATE
     | LOCAL_TIME
     ;
 
-array_
-    : L_BRACKET array_values? comment_or_nl R_BRACKET
+array
+    : L_BRACKET arrayValues? commentOrNl R_BRACKET
     ;
 
-array_values
-    : (comment_or_nl value nl_or_comment COMMA array_values comment_or_nl)
-    | comment_or_nl value nl_or_comment COMMA?
+arrayValues
+    : (commentOrNl value nlOrComment COMMA arrayValues commentOrNl)
+    | commentOrNl value nlOrComment COMMA?
     ;
 
-comment_or_nl
+commentOrNl
     : (COMMENT? NL)*
     ;
 
-nl_or_comment
+nlOrComment
     : (NL COMMENT?)*
     ;
 
 table
-    : standard_table
-    | array_table
+    : standardTable
+    | arrayTable
     ;
 
-standard_table
+standardTable
     : L_BRACKET key R_BRACKET
     ;
 
-inline_table
-    : L_BRACE inline_table_keyvals R_BRACE
+inlineTable
+    : L_BRACE inlineTableKeyvals R_BRACE
     ;
 
-inline_table_keyvals
-    : inline_table_keyvals_non_empty?
+inlineTableKeyvals
+    : inlineTableKeyvalsNonEmpty?
     ;
 
-inline_table_keyvals_non_empty
-    : key EQUALS value (COMMA inline_table_keyvals_non_empty)?
+inlineTableKeyvalsNonEmpty
+    : key EQUALS value (COMMA inlineTableKeyvalsNonEmpty)?
     ;
 
-array_table
+arrayTable
     : DOUBLE_L_BRACKET key DOUBLE_R_BRACKET
     ;

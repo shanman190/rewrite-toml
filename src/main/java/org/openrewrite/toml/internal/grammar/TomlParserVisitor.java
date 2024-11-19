@@ -29,11 +29,11 @@ public interface TomlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitComment(TomlParser.CommentContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#key_value}.
+	 * Visit a parse tree produced by {@link TomlParser#keyValue}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitKey_value(TomlParser.Key_valueContext ctx);
+	T visitKeyValue(TomlParser.KeyValueContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link TomlParser#key}.
 	 * @param ctx the parse tree
@@ -41,29 +41,29 @@ public interface TomlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitKey(TomlParser.KeyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#simple_key}.
+	 * Visit a parse tree produced by {@link TomlParser#simpleKey}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSimple_key(TomlParser.Simple_keyContext ctx);
+	T visitSimpleKey(TomlParser.SimpleKeyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#unquoted_key}.
+	 * Visit a parse tree produced by {@link TomlParser#unquotedKey}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUnquoted_key(TomlParser.Unquoted_keyContext ctx);
+	T visitUnquotedKey(TomlParser.UnquotedKeyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#quoted_key}.
+	 * Visit a parse tree produced by {@link TomlParser#quotedKey}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitQuoted_key(TomlParser.Quoted_keyContext ctx);
+	T visitQuotedKey(TomlParser.QuotedKeyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#dotted_key}.
+	 * Visit a parse tree produced by {@link TomlParser#dottedKey}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDotted_key(TomlParser.Dotted_keyContext ctx);
+	T visitDottedKey(TomlParser.DottedKeyContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link TomlParser#value}.
 	 * @param ctx the parse tree
@@ -83,47 +83,47 @@ public interface TomlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInteger(TomlParser.IntegerContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#floating_point}.
+	 * Visit a parse tree produced by {@link TomlParser#floatingPoint}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFloating_point(TomlParser.Floating_pointContext ctx);
+	T visitFloatingPoint(TomlParser.FloatingPointContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#bool_}.
+	 * Visit a parse tree produced by {@link TomlParser#bool}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBool_(TomlParser.Bool_Context ctx);
+	T visitBool(TomlParser.BoolContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#date_time}.
+	 * Visit a parse tree produced by {@link TomlParser#dateTime}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDate_time(TomlParser.Date_timeContext ctx);
+	T visitDateTime(TomlParser.DateTimeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#array_}.
+	 * Visit a parse tree produced by {@link TomlParser#array}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArray_(TomlParser.Array_Context ctx);
+	T visitArray(TomlParser.ArrayContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#array_values}.
+	 * Visit a parse tree produced by {@link TomlParser#arrayValues}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArray_values(TomlParser.Array_valuesContext ctx);
+	T visitArrayValues(TomlParser.ArrayValuesContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#comment_or_nl}.
+	 * Visit a parse tree produced by {@link TomlParser#commentOrNl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitComment_or_nl(TomlParser.Comment_or_nlContext ctx);
+	T visitCommentOrNl(TomlParser.CommentOrNlContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#nl_or_comment}.
+	 * Visit a parse tree produced by {@link TomlParser#nlOrComment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNl_or_comment(TomlParser.Nl_or_commentContext ctx);
+	T visitNlOrComment(TomlParser.NlOrCommentContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link TomlParser#table}.
 	 * @param ctx the parse tree
@@ -131,33 +131,33 @@ public interface TomlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTable(TomlParser.TableContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#standard_table}.
+	 * Visit a parse tree produced by {@link TomlParser#standardTable}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStandard_table(TomlParser.Standard_tableContext ctx);
+	T visitStandardTable(TomlParser.StandardTableContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#inline_table}.
+	 * Visit a parse tree produced by {@link TomlParser#inlineTable}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitInline_table(TomlParser.Inline_tableContext ctx);
+	T visitInlineTable(TomlParser.InlineTableContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#inline_table_keyvals}.
+	 * Visit a parse tree produced by {@link TomlParser#inlineTableKeyvals}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitInline_table_keyvals(TomlParser.Inline_table_keyvalsContext ctx);
+	T visitInlineTableKeyvals(TomlParser.InlineTableKeyvalsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#inline_table_keyvals_non_empty}.
+	 * Visit a parse tree produced by {@link TomlParser#inlineTableKeyvalsNonEmpty}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitInline_table_keyvals_non_empty(TomlParser.Inline_table_keyvals_non_emptyContext ctx);
+	T visitInlineTableKeyvalsNonEmpty(TomlParser.InlineTableKeyvalsNonEmptyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#array_table}.
+	 * Visit a parse tree produced by {@link TomlParser#arrayTable}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArray_table(TomlParser.Array_tableContext ctx);
+	T visitArrayTable(TomlParser.ArrayTableContext ctx);
 }
