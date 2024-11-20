@@ -27,17 +27,17 @@ options {
 }
 
 document
-    : expression (NL expression)* EOF
+    : expression? (NL expression?)* EOF
     ;
 
 expression
-    : keyValue comment
-    | table comment
+    : keyValue comment?
+    | table comment?
     | comment
     ;
 
 comment
-    : COMMENT?
+    : COMMENT
     ;
 
 keyValue
@@ -108,14 +108,14 @@ dateTime
     | LOCAL_TIME
     ;
 
-array
-    : L_BRACKET commentOrNl* R_BRACKET
-    | L_BRACKET commentOrNl* value (COMMA commentOrNl* value COMMA?)* commentOrNl* R_BRACKET
-    ;
-
 commentOrNl
     : COMMENT NL
     | NL
+    ;
+
+array
+    : L_BRACKET commentOrNl* R_BRACKET
+    | L_BRACKET commentOrNl* value (COMMA commentOrNl* value COMMA?)* commentOrNl* R_BRACKET
     ;
 
 table
@@ -124,7 +124,7 @@ table
     ;
 
 standardTable
-    : L_BRACKET key R_BRACKET
+    : L_BRACKET key R_BRACKET (commentOrNl* expression)*
     ;
 
 inlineTable

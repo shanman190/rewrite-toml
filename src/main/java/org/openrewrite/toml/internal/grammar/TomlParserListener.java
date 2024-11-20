@@ -158,16 +158,6 @@ public interface TomlParserListener extends ParseTreeListener {
 	 */
 	void exitDateTime(TomlParser.DateTimeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#array}.
-	 * @param ctx the parse tree
-	 */
-	void enterArray(TomlParser.ArrayContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link TomlParser#array}.
-	 * @param ctx the parse tree
-	 */
-	void exitArray(TomlParser.ArrayContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link TomlParser#commentOrNl}.
 	 * @param ctx the parse tree
 	 */
@@ -177,6 +167,16 @@ public interface TomlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCommentOrNl(TomlParser.CommentOrNlContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link TomlParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray(TomlParser.ArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TomlParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray(TomlParser.ArrayContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link TomlParser#table}.
 	 * @param ctx the parse tree

@@ -197,18 +197,6 @@ public class TomlParserBaseListener implements TomlParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArray(TomlParser.ArrayContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitArray(TomlParser.ArrayContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterCommentOrNl(TomlParser.CommentOrNlContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -216,6 +204,18 @@ public class TomlParserBaseListener implements TomlParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCommentOrNl(TomlParser.CommentOrNlContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArray(TomlParser.ArrayContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArray(TomlParser.ArrayContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

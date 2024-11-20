@@ -101,17 +101,17 @@ public interface TomlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDateTime(TomlParser.DateTimeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#array}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitArray(TomlParser.ArrayContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link TomlParser#commentOrNl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitCommentOrNl(TomlParser.CommentOrNlContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link TomlParser#array}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArray(TomlParser.ArrayContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link TomlParser#table}.
 	 * @param ctx the parse tree

@@ -306,6 +306,9 @@ public interface Toml extends Tree {
         @With
         Markers markers;
 
+        @With
+        TomlRightPadded<Toml.Identifier> name;
+
         List<TomlRightPadded<Toml>> values;
 
         public List<Toml> getValues() {
@@ -345,7 +348,7 @@ public interface Toml extends Tree {
             }
 
             public Table withValues(List<TomlRightPadded<Toml>> values) {
-                return t.values == values ? t : new Table(t.id, t.prefix, t.markers, values);
+                return t.values == values ? t : new Table(t.id, t.prefix, t.markers, t.name, values);
             }
         }
     }

@@ -323,6 +323,36 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                     randomId(),
                     prefix,
                     Markers.build(Collections.singletonList(new InlineTable(randomId()))),
+                    null,
+                    elements
+            );
+        });
+    }
+
+    @Override
+    public Toml visitStandardTable(TomlParser.StandardTableContext ctx) {
+        return convert(ctx, (c, prefix) -> {
+            sourceBefore("[");
+            String tableName = c.key().getText();
+            Toml.Identifier name = new Toml.Identifier(
+                    randomId(),
+                    sourceBefore(tableName),
+                    Markers.EMPTY,
+                    tableName
+            );
+            TomlRightPadded<Toml.Identifier> nameRightPadded = TomlRightPadded.build(name).withAfter(sourceBefore("]"));
+
+            List<TomlParser.ExpressionContext> values = c.expression();
+            List<TomlRightPadded<Toml>> elements = new ArrayList<>();
+            for (int i = 0; i < values.size(); i++) {
+                elements.add(TomlRightPadded.build(visit(values.get(i))));
+            }
+
+            return new Toml.Table(
+                    randomId(),
+                    prefix,
+                    Markers.EMPTY,
+                    nameRightPadded,
                     elements
             );
         });

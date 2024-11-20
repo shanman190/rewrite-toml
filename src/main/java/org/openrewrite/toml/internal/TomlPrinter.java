@@ -94,6 +94,11 @@ public class TomlPrinter<P> extends TomlVisitor<PrintOutputCapture<P>> {
             p.append("{");
             visitRightPadded(table.getPadding().getValues(), ",", p);
             p.append("}");
+        } else {
+            p.append("[");
+            visitRightPadded(table.getName(), p);
+            p.append("]");
+            visitRightPadded(table.getPadding().getValues(), "", p);
         }
         afterSyntax(table, p);
         return table;
