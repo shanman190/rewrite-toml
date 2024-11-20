@@ -187,4 +187,25 @@ class TomlParserTest implements RewriteTest {
           )
         );
     }
+
+    @Test
+    void arrayTable() {
+        rewriteRun(
+          toml(
+            """
+             [[products]]
+             name = "Hammer"
+             sku = 738594937
+             
+             [[products]]  # empty table within the array
+             
+             [[products]]
+             name = "Nail"
+             sku = 284758393
+             
+             color = "gray"
+             """
+          )
+        );
+    }
 }

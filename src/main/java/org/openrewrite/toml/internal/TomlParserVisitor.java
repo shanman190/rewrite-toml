@@ -11,6 +11,7 @@ import org.openrewrite.internal.EncodingDetectingInputStream;
 import org.openrewrite.marker.Markers;
 import org.openrewrite.toml.internal.grammar.TomlParser;
 import org.openrewrite.toml.internal.grammar.TomlParserBaseVisitor;
+import org.openrewrite.toml.marker.ArrayTable;
 import org.openrewrite.toml.marker.InlineTable;
 import org.openrewrite.toml.tree.Space;
 import org.openrewrite.toml.tree.Toml;
@@ -352,6 +353,35 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                     randomId(),
                     prefix,
                     Markers.EMPTY,
+                    nameRightPadded,
+                    elements
+            );
+        });
+    }
+
+    @Override
+    public Toml visitArrayTable(TomlParser.ArrayTableContext ctx) {
+        return convert(ctx, (c, prefix) -> {
+            sourceBefore("[[");
+            String tableName = c.key().getText();
+            Toml.Identifier name = new Toml.Identifier(
+                    randomId(),
+                    sourceBefore(tableName),
+                    Markers.EMPTY,
+                    tableName
+            );
+            TomlRightPadded<Toml.Identifier> nameRightPadded = TomlRightPadded.build(name).withAfter(sourceBefore("]]"));
+
+            List<TomlParser.ExpressionContext> values = c.expression();
+            List<TomlRightPadded<Toml>> elements = new ArrayList<>();
+            for (int i = 0; i < values.size(); i++) {
+                elements.add(TomlRightPadded.build(visit(values.get(i))));
+            }
+
+            return new Toml.Table(
+                    randomId(),
+                    prefix,
+                    Markers.build(Collections.singletonList(new ArrayTable(randomId()))),
                     nameRightPadded,
                     elements
             );

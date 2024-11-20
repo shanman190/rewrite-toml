@@ -133,5 +133,5 @@ inlineTable
     ;
 
 arrayTable
-    : DOUBLE_L_BRACKET key DOUBLE_R_BRACKET
+    : DOUBLE_L_BRACKET key DOUBLE_R_BRACKET (commentOrNl* expression)*
     ;

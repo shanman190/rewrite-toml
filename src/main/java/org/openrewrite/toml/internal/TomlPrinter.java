@@ -20,6 +20,7 @@ import org.openrewrite.PrintOutputCapture;
 import org.openrewrite.marker.Marker;
 import org.openrewrite.marker.Markers;
 import org.openrewrite.toml.TomlVisitor;
+import org.openrewrite.toml.marker.ArrayTable;
 import org.openrewrite.toml.marker.InlineTable;
 import org.openrewrite.toml.tree.Comment;
 import org.openrewrite.toml.tree.Space;
@@ -94,6 +95,11 @@ public class TomlPrinter<P> extends TomlVisitor<PrintOutputCapture<P>> {
             p.append("{");
             visitRightPadded(table.getPadding().getValues(), ",", p);
             p.append("}");
+        } else if (table.getMarkers().findFirst(ArrayTable.class).isPresent()) {
+            p.append("[[");
+            visitRightPadded(table.getName(), p);
+            p.append("]]");
+            visitRightPadded(table.getPadding().getValues(), "", p);
         } else {
             p.append("[");
             visitRightPadded(table.getName(), p);
