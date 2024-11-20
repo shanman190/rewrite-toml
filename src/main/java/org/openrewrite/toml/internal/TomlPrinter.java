@@ -20,6 +20,7 @@ import org.openrewrite.PrintOutputCapture;
 import org.openrewrite.marker.Marker;
 import org.openrewrite.marker.Markers;
 import org.openrewrite.toml.TomlVisitor;
+import org.openrewrite.toml.marker.InlineTable;
 import org.openrewrite.toml.tree.Comment;
 import org.openrewrite.toml.tree.Space;
 import org.openrewrite.toml.tree.Toml;
@@ -31,8 +32,11 @@ import java.util.function.UnaryOperator;
 public class TomlPrinter<P> extends TomlVisitor<PrintOutputCapture<P>> {
 
     public Toml visitArray(Toml.Array array, PrintOutputCapture<P> p) {
-        visitSpace(array.getPrefix(), p);
-        visitMarkers(array.getMarkers(), p);
+        beforeSyntax(array, p);
+        p.append("[");
+        visitRightPadded(array.getPadding().getValues(), ",", p);
+        p.append("]");
+        afterSyntax(array, p);
         return array;
     }
 
@@ -42,6 +46,12 @@ public class TomlPrinter<P> extends TomlVisitor<PrintOutputCapture<P>> {
         visitSpace(document.getEof(), p);
         afterSyntax(document, p);
         return document;
+    }
+
+    public Toml visitEmpty(Toml.Empty empty, PrintOutputCapture<P> p) {
+        beforeSyntax(empty, p);
+        afterSyntax(empty, p);
+        return empty;
     }
 
     public Toml visitIdentifier(Toml.Identifier identifier, PrintOutputCapture<P> p) {
@@ -75,6 +85,18 @@ public class TomlPrinter<P> extends TomlVisitor<PrintOutputCapture<P>> {
             p.append("#").append(comment.getText()).append(comment.getSuffix());
         }
         return space;
+    }
+
+    @Override
+    public Toml visitTable(Toml.Table table, PrintOutputCapture<P> p) {
+        beforeSyntax(table, p);
+        if (table.getMarkers().findFirst(InlineTable.class).isPresent()) {
+            p.append("{");
+            visitRightPadded(table.getPadding().getValues(), ",", p);
+            p.append("}");
+        }
+        afterSyntax(table, p);
+        return table;
     }
 
     protected void visitRightPadded(List<? extends TomlRightPadded<? extends Toml>> nodes, String suffixBetween, PrintOutputCapture<P> p) {

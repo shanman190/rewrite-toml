@@ -11,6 +11,7 @@ import org.openrewrite.internal.EncodingDetectingInputStream;
 import org.openrewrite.marker.Markers;
 import org.openrewrite.toml.internal.grammar.TomlParser;
 import org.openrewrite.toml.internal.grammar.TomlParserBaseVisitor;
+import org.openrewrite.toml.marker.InlineTable;
 import org.openrewrite.toml.tree.Space;
 import org.openrewrite.toml.tree.Toml;
 import org.openrewrite.toml.tree.TomlKey;
@@ -269,6 +270,64 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
         });
     }
 
+    @Override
+    public Toml visitArray(TomlParser.ArrayContext ctx) {
+        return convert(ctx, (c, prefix) -> {
+            sourceBefore("[");
+            List<TomlParser.ValueContext> values = c.value();
+            List<TomlRightPadded<Toml>> elements = new ArrayList<>();
+            for (int i = 0; i < values.size(); i++) {
+                Toml element = visit(values.get(i));
+                if (i == values.size() - 1) {
+                    if (positionOfNext(",", ']') >= 0) {
+                        elements.add(TomlRightPadded.build(element).withAfter(sourceBefore(",")));
+                        elements.add(TomlRightPadded.build((Toml) new Toml.Empty(randomId(), Space.EMPTY, Markers.EMPTY)).withAfter(sourceBefore("]")));
+                    } else {
+                        elements.add(TomlRightPadded.build(element).withAfter(sourceBefore("]")));
+                    }
+                } else {
+                    elements.add(TomlRightPadded.build(element).withAfter(sourceBefore(",")));
+                }
+            }
+
+            return new Toml.Array(
+                    randomId(),
+                    prefix,
+                    Markers.EMPTY,
+                    elements
+            );
+        });
+    }
+
+    @Override
+    public Toml visitInlineTable(TomlParser.InlineTableContext ctx) {
+        return convert(ctx, (c, prefix) -> {
+            sourceBefore("{");
+            List<TomlParser.KeyValueContext> values = c.keyValue();
+            List<TomlRightPadded<Toml>> elements = new ArrayList<>();
+            for (int i = 0; i < values.size(); i++) {
+                Toml element = visit(values.get(i));
+                if (i == values.size() - 1) {
+                    if (positionOfNext(",", '}') >= 0) {
+                        elements.add(TomlRightPadded.build(element).withAfter(sourceBefore(",")));
+                        elements.add(TomlRightPadded.build((Toml) new Toml.Empty(randomId(), Space.EMPTY, Markers.EMPTY)).withAfter(sourceBefore("}")));
+                    } else {
+                        elements.add(TomlRightPadded.build(element).withAfter(sourceBefore("}")));
+                    }
+                } else {
+                    elements.add(TomlRightPadded.build(element).withAfter(sourceBefore(",")));
+                }
+            }
+
+            return new Toml.Table(
+                    randomId(),
+                    prefix,
+                    Markers.build(Collections.singletonList(new InlineTable(randomId()))),
+                    elements
+            );
+        });
+    }
+
     private Space prefix(ParserRuleContext ctx) {
         return prefix(ctx.getStart());
     }
@@ -332,7 +391,6 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
     }
 
     private int positionOfNext(String untilDelim, @Nullable Character stop) {
-        boolean inMultiLineComment = false;
         boolean inSingleLineComment = false;
 
         int delimIndex = cursor;
@@ -342,23 +400,12 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                     inSingleLineComment = false;
                 }
             } else {
-                if (inMultiLineComment) {
-                    if (source.charAt(delimIndex) == '*' && source.charAt(delimIndex + 1) == '/') {
-                        inMultiLineComment = false;
-                        delimIndex += 2;
-                    }
-                } else if (source.charAt(delimIndex) == '/' && source.length() - untilDelim.length() > delimIndex + 1) {
-                    int next = source.charAt(delimIndex + 1);
-                    if (next == '/') {
-                        inSingleLineComment = true;
-                        delimIndex++;
-                    } else if (next == '*') {
-                        inMultiLineComment = true;
-                        delimIndex++;
-                    }
+                if (source.charAt(delimIndex) == '#') {
+                    inSingleLineComment = true;
+                    delimIndex++;
                 }
 
-                if (!inMultiLineComment && !inSingleLineComment) {
+                if (!inSingleLineComment) {
                     if (stop != null && source.charAt(delimIndex) == stop) {
                         return -1; // reached stop word before finding the delimiter
                     }

@@ -23,16 +23,20 @@ with the License.  You may obtain a copy of the License at
 
 lexer grammar TomlLexer;
 
+channels {
+    COMMENTS_CHANNEL
+}
+
 WS               : [ \t]+ -> skip;
 NL               : ('\r'? '\n')+;
-COMMENT          : '#' (~[\n])*;
+COMMENT          : '#' (~[\r\n])* -> channel(COMMENTS_CHANNEL);
 L_BRACKET        : '[';
 DOUBLE_L_BRACKET : '[[';
 R_BRACKET        : ']';
 DOUBLE_R_BRACKET : ']]';
 EQUALS           : '=' -> pushMode(SIMPLE_VALUE_MODE);
 DOT              : '.';
-COMMA            : ',';
+COMMA            : ',' -> skip;
 
 fragment DIGIT : [0-9];
 fragment ALPHA : [A-Za-z];

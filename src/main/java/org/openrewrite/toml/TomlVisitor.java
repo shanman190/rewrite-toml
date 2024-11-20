@@ -46,9 +46,16 @@ public class TomlVisitor<P> extends TreeVisitor<Toml, P> {
         Toml.Document d = document;
         d = d.withPrefix(visitSpace(d.getPrefix(), p));
         d = d.withMarkers(visitMarkers(d.getMarkers(), p));
-        d = d.withValues(ListUtils.map(d.getValues(), v -> (TomlValue) visit(v, p)));
+        d = d.withValues(ListUtils.map(d.getValues(), v -> visit(v, p)));
         d = d.withEof(visitSpace(d.getEof(), p));
         return d;
+    }
+
+    public Toml visitEmpty(Toml.Empty empty, P p) {
+        Toml.Empty e = empty;
+        e = e.withPrefix(visitSpace(e.getPrefix(), p));
+        e = e.withMarkers(visitMarkers(e.getMarkers(), p));
+        return e;
     }
 
     public Toml visitIdentifier(Toml.Identifier identifier, P p) {
@@ -63,7 +70,7 @@ public class TomlVisitor<P> extends TreeVisitor<Toml, P> {
         kv = kv.withPrefix(visitSpace(kv.getPrefix(), p));
         kv = kv.withMarkers(visitMarkers(kv.getMarkers(), p));
         kv = kv.getPadding().withKey(visitRightPadded(kv.getPadding().getKey(), p));
-        kv = kv.withValue((TomlValue) visit(kv.getValue(), p));
+        kv = kv.withValue(visit(kv.getValue(), p));
         return kv;
     }
 
@@ -76,6 +83,14 @@ public class TomlVisitor<P> extends TreeVisitor<Toml, P> {
 
     public Space visitSpace(Space space, P p) {
         return space;
+    }
+
+    public Toml visitTable(Toml.Table table, P p) {
+        Toml.Table t = table;
+        t = t.withPrefix(visitSpace(t.getPrefix(), p));
+        t = t.withMarkers(visitMarkers(t.getMarkers(), p));
+        t = t.withValues(ListUtils.map(t.getValues(), v -> visit(v, p)));
+        return t;
     }
 
     public <T> TomlRightPadded<T> visitRightPadded(@Nullable TomlRightPadded<T> right, P p) {

@@ -107,23 +107,11 @@ public interface TomlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArray(TomlParser.ArrayContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TomlParser#arrayValues}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitArrayValues(TomlParser.ArrayValuesContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link TomlParser#commentOrNl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitCommentOrNl(TomlParser.CommentOrNlContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link TomlParser#nlOrComment}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNlOrComment(TomlParser.NlOrCommentContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link TomlParser#table}.
 	 * @param ctx the parse tree
@@ -142,18 +130,6 @@ public interface TomlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitInlineTable(TomlParser.InlineTableContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link TomlParser#inlineTableKeyvals}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInlineTableKeyvals(TomlParser.InlineTableKeyvalsContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link TomlParser#inlineTableKeyvalsNonEmpty}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInlineTableKeyvalsNonEmpty(TomlParser.InlineTableKeyvalsNonEmptyContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link TomlParser#arrayTable}.
 	 * @param ctx the parse tree

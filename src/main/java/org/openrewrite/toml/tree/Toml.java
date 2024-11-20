@@ -70,13 +70,13 @@ public interface Toml extends Tree {
         @With
         Markers markers;
 
-        List<TomlRightPadded<TomlValue>> values;
+        List<TomlRightPadded<Toml>> values;
 
-        public List<TomlValue> getValues() {
+        public List<Toml> getValues() {
             return TomlRightPadded.getElements(values);
         }
 
-        public Array withValues(List<TomlValue> values) {
+        public Array withValues(List<Toml> values) {
             return getPadding().withValues(TomlRightPadded.withElements(this.values, values));
         }
 
@@ -104,11 +104,11 @@ public interface Toml extends Tree {
         public static class Padding {
             private final Array t;
 
-            public List<TomlRightPadded<TomlValue>> getValues() {
+            public List<TomlRightPadded<Toml>> getValues() {
                 return t.values;
             }
 
-            public Array withValues(List<TomlRightPadded<TomlValue>> values) {
+            public Array withValues(List<TomlRightPadded<Toml>> values) {
                 return t.values == values ? t : new Array(t.id, t.prefix, t.markers, values);
             }
         }
@@ -153,6 +153,22 @@ public interface Toml extends Tree {
         @Override
         public <P> TreeVisitor<?, PrintOutputCapture<P>> printer(Cursor cursor) {
             return new TomlPrinter<>();
+        }
+    }
+
+    @Value
+    @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
+    @With
+    class Empty implements Toml {
+        @EqualsAndHashCode.Include
+        UUID id;
+
+        Space prefix;
+        Markers markers;
+
+        @Override
+        public <P> Toml acceptToml(TomlVisitor<P> v, P p) {
+            return v.visitEmpty(this, p);
         }
     }
 
@@ -271,131 +287,66 @@ public interface Toml extends Tree {
         }
     }
 
-//    @Value
-//    @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
-//    @With
-//    class Identifier implements Toml {
-//        @EqualsAndHashCode.Include
-//        UUID id;
-//
-//        Space prefix;
-//        Markers markers;
-//        String name;
-//
-//        @Override
-//        public <P> Toml acceptToml(TomlVisitor<P> v, P p) {
-//            return v.visitIdentifier(this, p);
-//        }
-//    }
-//
-//    @Value
-//    @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
-//    @With
-//    class Literal implements Toml {
-//        @EqualsAndHashCode.Include
-//        UUID id;
-//
-//        Space prefix;
-//        Markers markers;
-//        TomlType.Primitive type;
-//        String source;
-//        Object value;
-//
-//        @Override
-//        public <P> Toml acceptToml(TomlVisitor<P> v, P p) {
-//            return v.visitLiteral(this, p);
-//        }
-//    }
-//
-//    @ToString
-//    @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-//    @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
-//    @RequiredArgsConstructor
-//    @AllArgsConstructor(access = AccessLevel.PRIVATE)
-//    class Member implements Toml {
-//        @Nullable
-//        @NonFinal
-//        transient WeakReference<Padding> padding;
-//
-//        @Getter
-//        @EqualsAndHashCode.Include
-//        @With
-//        UUID id;
-//
-//        @Getter
-//        @With
-//        Space prefix;
-//
-//        @Getter
-//        @With
-//        Markers markers;
-//
-//        TomlRightPadded<Toml> key;
-//
-//        @Getter
-//        @With
-//        Toml value;
-//
-//        @Override
-//        public <P> Toml acceptToml(TomlVisitor<P> v, P p) {
-//            return v.visitMember(this, p);
-//        }
-//
-//        public Toml getKey() {
-//            return key.getElement();
-//        }
-//
-//        public Member withKey(Toml key) {
-//            //noinspection ConstantConditions
-//            return getPadding().withKey(TomlRightPadded.withElement(this.key, key));
-//        }
-//
-//        public Padding getPadding() {
-//            Padding p;
-//            if (this.padding == null) {
-//                p = new Padding(this);
-//                this.padding = new WeakReference<>(p);
-//            } else {
-//                p = this.padding.get();
-//                if (p == null || p.t != this) {
-//                    p = new Padding(this);
-//                    this.padding = new WeakReference<>(p);
-//                }
-//            }
-//            return p;
-//        }
-//
-//        @RequiredArgsConstructor
-//        public static class Padding {
-//            private final Member t;
-//
-//            public TomlRightPadded<Toml> getKey() {
-//                return t.key;
-//            }
-//
-//            public Member withKey(TomlRightPadded<Toml> key) {
-//                return t.key == key ? t : new Member(t.padding, t.id, t.prefix, t.markers, key, t.value);
-//            }
-//        }
-//    }
-//
-//    @Value
-//    @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
-//    @With
-//    class Table implements Toml {
-//        @EqualsAndHashCode.Include
-//        UUID id;
-//
-//        Space prefix;
-//        Markers markers;
-//
-//        @Getter
-//        @With
-//        List<TomlRightPadded<Member>> members;
-//
-//        @Override
-//        public <P> Toml acceptToml(TomlVisitor<P> v, P p) {
-//            return v.visitTable(this, p);
-//        }
-//    }
+    @Value
+    @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
+    @RequiredArgsConstructor
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    class Table implements Toml {
+        @Nullable
+        @NonFinal
+        transient WeakReference<Padding> padding;
+
+        @EqualsAndHashCode.Include
+        @With
+        UUID id;
+
+        @With
+        Space prefix;
+
+        @With
+        Markers markers;
+
+        List<TomlRightPadded<Toml>> values;
+
+        public List<Toml> getValues() {
+            return TomlRightPadded.getElements(values);
+        }
+
+        public Table withValues(List<Toml> values) {
+            return getPadding().withValues(TomlRightPadded.withElements(this.values, values));
+        }
+
+        @Override
+        public <P> Toml acceptToml(TomlVisitor<P> v, P p) {
+            return v.visitTable(this, p);
+        }
+
+        public Table.Padding getPadding() {
+            Table.Padding p;
+            if (this.padding == null) {
+                p = new Table.Padding(this);
+                this.padding = new WeakReference<>(p);
+            } else {
+                p = this.padding.get();
+                if (p == null || p.t != this) {
+                    p = new Table.Padding(this);
+                    this.padding = new WeakReference<>(p);
+                }
+            }
+            return p;
+        }
+
+        @RequiredArgsConstructor
+        public static class Padding {
+            private final Table t;
+
+            public List<TomlRightPadded<Toml>> getValues() {
+                return t.values;
+            }
+
+            public Table withValues(List<TomlRightPadded<Toml>> values) {
+                return t.values == values ? t : new Table(t.id, t.prefix, t.markers, values);
+            }
+        }
+    }
 }

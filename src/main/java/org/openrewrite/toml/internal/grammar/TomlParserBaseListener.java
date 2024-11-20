@@ -209,18 +209,6 @@ public class TomlParserBaseListener implements TomlParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayValues(TomlParser.ArrayValuesContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitArrayValues(TomlParser.ArrayValuesContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterCommentOrNl(TomlParser.CommentOrNlContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -228,18 +216,6 @@ public class TomlParserBaseListener implements TomlParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCommentOrNl(TomlParser.CommentOrNlContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterNlOrComment(TomlParser.NlOrCommentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNlOrComment(TomlParser.NlOrCommentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -276,30 +252,6 @@ public class TomlParserBaseListener implements TomlParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitInlineTable(TomlParser.InlineTableContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInlineTableKeyvals(TomlParser.InlineTableKeyvalsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInlineTableKeyvals(TomlParser.InlineTableKeyvalsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInlineTableKeyvalsNonEmpty(TomlParser.InlineTableKeyvalsNonEmptyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInlineTableKeyvalsNonEmpty(TomlParser.InlineTableKeyvalsNonEmptyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

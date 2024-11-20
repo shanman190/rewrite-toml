@@ -109,20 +109,13 @@ dateTime
     ;
 
 array
-    : L_BRACKET arrayValues? commentOrNl R_BRACKET
-    ;
-
-arrayValues
-    : (commentOrNl value nlOrComment COMMA arrayValues commentOrNl)
-    | commentOrNl value nlOrComment COMMA?
+    : L_BRACKET commentOrNl* R_BRACKET
+    | L_BRACKET commentOrNl* value (COMMA commentOrNl* value COMMA?)* commentOrNl* R_BRACKET
     ;
 
 commentOrNl
-    : (COMMENT? NL)*
-    ;
-
-nlOrComment
-    : (NL COMMENT?)*
+    : COMMENT NL
+    | NL
     ;
 
 table
@@ -135,15 +128,8 @@ standardTable
     ;
 
 inlineTable
-    : L_BRACE inlineTableKeyvals R_BRACE
-    ;
-
-inlineTableKeyvals
-    : inlineTableKeyvalsNonEmpty?
-    ;
-
-inlineTableKeyvalsNonEmpty
-    : key EQUALS value (COMMA inlineTableKeyvalsNonEmpty)?
+    : L_BRACE commentOrNl* R_BRACE
+    | L_BRACE commentOrNl* keyValue (COMMA commentOrNl* keyValue COMMA?)* commentOrNl* R_BRACE
     ;
 
 arrayTable

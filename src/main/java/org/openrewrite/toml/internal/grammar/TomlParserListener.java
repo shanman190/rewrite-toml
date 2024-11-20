@@ -168,16 +168,6 @@ public interface TomlParserListener extends ParseTreeListener {
 	 */
 	void exitArray(TomlParser.ArrayContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TomlParser#arrayValues}.
-	 * @param ctx the parse tree
-	 */
-	void enterArrayValues(TomlParser.ArrayValuesContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link TomlParser#arrayValues}.
-	 * @param ctx the parse tree
-	 */
-	void exitArrayValues(TomlParser.ArrayValuesContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link TomlParser#commentOrNl}.
 	 * @param ctx the parse tree
 	 */
@@ -187,16 +177,6 @@ public interface TomlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCommentOrNl(TomlParser.CommentOrNlContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link TomlParser#nlOrComment}.
-	 * @param ctx the parse tree
-	 */
-	void enterNlOrComment(TomlParser.NlOrCommentContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link TomlParser#nlOrComment}.
-	 * @param ctx the parse tree
-	 */
-	void exitNlOrComment(TomlParser.NlOrCommentContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link TomlParser#table}.
 	 * @param ctx the parse tree
@@ -227,26 +207,6 @@ public interface TomlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitInlineTable(TomlParser.InlineTableContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link TomlParser#inlineTableKeyvals}.
-	 * @param ctx the parse tree
-	 */
-	void enterInlineTableKeyvals(TomlParser.InlineTableKeyvalsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link TomlParser#inlineTableKeyvals}.
-	 * @param ctx the parse tree
-	 */
-	void exitInlineTableKeyvals(TomlParser.InlineTableKeyvalsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link TomlParser#inlineTableKeyvalsNonEmpty}.
-	 * @param ctx the parse tree
-	 */
-	void enterInlineTableKeyvalsNonEmpty(TomlParser.InlineTableKeyvalsNonEmptyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link TomlParser#inlineTableKeyvalsNonEmpty}.
-	 * @param ctx the parse tree
-	 */
-	void exitInlineTableKeyvalsNonEmpty(TomlParser.InlineTableKeyvalsNonEmptyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link TomlParser#arrayTable}.
 	 * @param ctx the parse tree
