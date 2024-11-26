@@ -272,6 +272,8 @@ public interface Toml extends Tree {
 
         Markers markers;
 
+        TomlType.Primitive type;
+
         String source;
 
         Object value;

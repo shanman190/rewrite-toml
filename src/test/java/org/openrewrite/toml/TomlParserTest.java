@@ -208,4 +208,46 @@ class TomlParserTest implements RewriteTest {
           )
         );
     }
+
+    @Test
+    void bareKeys() {
+        rewriteRun(
+          toml(
+            """
+            key = "value"
+            bare_key = "value"
+            bare-key = "value"
+            1234 = "value"
+            """
+          )
+        );
+    }
+
+    @Test
+    void quotedKeys() {
+        rewriteRun(
+          toml(
+            """
+             "127.0.0.1" = "value"
+             "character encoding" = "value"
+             "ʎǝʞ" = "value"
+             'key2' = "value"
+             'quoted "value"' = "value"
+             """
+          )
+        );
+    }
+
+    @Test
+    void dottedKeys() {
+        rewriteRun(
+          toml(
+            """
+             physical.color = "orange"
+             physical.shape = "round"
+             site."google.com" = true
+             """
+          )
+        )
+    }
 }

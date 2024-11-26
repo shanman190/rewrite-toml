@@ -13,10 +13,7 @@ import org.openrewrite.toml.internal.grammar.TomlParser;
 import org.openrewrite.toml.internal.grammar.TomlParserBaseVisitor;
 import org.openrewrite.toml.marker.ArrayTable;
 import org.openrewrite.toml.marker.InlineTable;
-import org.openrewrite.toml.tree.Space;
-import org.openrewrite.toml.tree.Toml;
-import org.openrewrite.toml.tree.TomlKey;
-import org.openrewrite.toml.tree.TomlRightPadded;
+import org.openrewrite.toml.tree.*;
 
 import java.nio.charset.Charset;
 import java.nio.file.Path;
@@ -143,6 +140,7 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                     randomId(),
                     prefix,
                     Markers.EMPTY,
+                    TomlType.Primitive.String,
                     string,
                     string.substring(1, string.length() - 1)
             );
@@ -162,6 +160,7 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                     randomId(),
                     prefix,
                     Markers.EMPTY,
+                    TomlType.Primitive.Integer,
                     rawNumber,
                     numberValue
             );
@@ -177,6 +176,7 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                         randomId(),
                         prefix,
                         Markers.EMPTY,
+                        TomlType.Primitive.Float,
                         rawNumber,
                         "nan"
                 );
@@ -185,6 +185,7 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                         randomId(),
                         prefix,
                         Markers.EMPTY,
+                        TomlType.Primitive.Float,
                         rawNumber,
                         "inf"
                 );
@@ -196,6 +197,7 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                     randomId(),
                     prefix,
                     Markers.EMPTY,
+                    TomlType.Primitive.Float,
                     rawNumber,
                     numberValue
             );
@@ -211,6 +213,7 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                     randomId(),
                     prefix,
                     Markers.EMPTY,
+                    TomlType.Primitive.Boolean,
                     bool,
                     boolValue
             );
@@ -240,6 +243,7 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                         randomId(),
                         prefix,
                         Markers.EMPTY,
+                        TomlType.Primitive.OffsetDateTime,
                         dateTime,
                         dateTime.contains("T") ? OffsetDateTime.parse(dateTime) : OffsetDateTime.parse(dateTime, RFC3339_OFFSET_DATE_TIME)
                 );
@@ -248,6 +252,7 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                         randomId(),
                         prefix,
                         Markers.EMPTY,
+                        TomlType.Primitive.LocalDateTime,
                         dateTime,
                         LocalDateTime.parse(dateTime)
                 );
@@ -256,6 +261,7 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                         randomId(),
                         prefix,
                         Markers.EMPTY,
+                        TomlType.Primitive.LocalDate,
                         dateTime,
                         LocalDate.parse(dateTime)
                 );
@@ -265,6 +271,7 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                     randomId(),
                     prefix,
                     Markers.EMPTY,
+                    TomlType.Primitive.LocalTime,
                     dateTime,
                     LocalTime.parse(dateTime)
             );
