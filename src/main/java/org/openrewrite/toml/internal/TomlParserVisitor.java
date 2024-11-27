@@ -112,13 +112,38 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
     }
 
     @Override
-    public TomlKey visitKey(TomlParser.KeyContext ctx) {
+    public Toml.Identifier visitKey(TomlParser.KeyContext ctx) {
+        return (Toml.Identifier) super.visitKey(ctx);
+    }
+
+    @Override
+    public Toml.Identifier visitSimpleKey(TomlParser.SimpleKeyContext ctx) {
         return convert(ctx, (c, prefix) -> new Toml.Identifier(
                 randomId(),
                 prefix,
                 Markers.EMPTY,
+                c.getText(),
                 c.getText()
         ));
+    }
+
+    @Override
+    public Toml.Identifier visitDottedKey(TomlParser.DottedKeyContext ctx) {
+        Space prefix = prefix(ctx);
+        StringBuilder text = new StringBuilder();
+        StringBuilder key = new StringBuilder();
+        for (ParseTree child : ctx.children) {
+            Space space = sourceBefore(child.getText());
+            text.append(space.getWhitespace()).append(child.getText());
+            key.append(child.getText());
+        }
+        return new Toml.Identifier(
+                randomId(),
+                prefix,
+                Markers.EMPTY,
+                text.toString(),
+                key.toString()
+        );
     }
 
     @Override
@@ -127,7 +152,7 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                 randomId(),
                 prefix,
                 Markers.EMPTY,
-                TomlRightPadded.build(visitKey(c.key())).withAfter(sourceBefore("=")),
+                TomlRightPadded.build((TomlKey) visitKey(c.key())).withAfter(sourceBefore("=")),
                 visitValue(c.value())
             ));
     }
@@ -341,14 +366,8 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
     public Toml visitStandardTable(TomlParser.StandardTableContext ctx) {
         return convert(ctx, (c, prefix) -> {
             sourceBefore("[");
-            String tableName = c.key().getText();
-            Toml.Identifier name = new Toml.Identifier(
-                    randomId(),
-                    sourceBefore(tableName),
-                    Markers.EMPTY,
-                    tableName
-            );
-            TomlRightPadded<Toml.Identifier> nameRightPadded = TomlRightPadded.build(name).withAfter(sourceBefore("]"));
+            Toml.Identifier tableName = visitKey(c.key());
+            TomlRightPadded<Toml.Identifier> nameRightPadded = TomlRightPadded.build(tableName).withAfter(sourceBefore("]"));
 
             List<TomlParser.ExpressionContext> values = c.expression();
             List<TomlRightPadded<Toml>> elements = new ArrayList<>();
@@ -370,14 +389,8 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
     public Toml visitArrayTable(TomlParser.ArrayTableContext ctx) {
         return convert(ctx, (c, prefix) -> {
             sourceBefore("[[");
-            String tableName = c.key().getText();
-            Toml.Identifier name = new Toml.Identifier(
-                    randomId(),
-                    sourceBefore(tableName),
-                    Markers.EMPTY,
-                    tableName
-            );
-            TomlRightPadded<Toml.Identifier> nameRightPadded = TomlRightPadded.build(name).withAfter(sourceBefore("]]"));
+            Toml.Identifier tableName = visitKey(c.key());
+            TomlRightPadded<Toml.Identifier> nameRightPadded = TomlRightPadded.build(tableName).withAfter(sourceBefore("]]"));
 
             List<TomlParser.ExpressionContext> values = c.expression();
             List<TomlRightPadded<Toml>> elements = new ArrayList<>();

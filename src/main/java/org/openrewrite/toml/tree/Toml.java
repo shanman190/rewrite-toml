@@ -181,6 +181,7 @@ public interface Toml extends Tree {
 
         Space prefix;
         Markers markers;
+        String source;
         String name;
 
         @Override

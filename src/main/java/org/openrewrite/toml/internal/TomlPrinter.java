@@ -57,7 +57,7 @@ public class TomlPrinter<P> extends TomlVisitor<PrintOutputCapture<P>> {
 
     public Toml visitIdentifier(Toml.Identifier identifier, PrintOutputCapture<P> p) {
         beforeSyntax(identifier, p);
-        p.append(identifier.getName());
+        p.append(identifier.getSource());
         afterSyntax(identifier, p);
         return identifier;
     }

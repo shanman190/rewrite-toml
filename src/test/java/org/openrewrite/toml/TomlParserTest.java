@@ -250,4 +250,45 @@ class TomlParserTest implements RewriteTest {
           )
         );
     }
+
+    @Test
+    void extraWhitespaceDottedKeys() {
+        rewriteRun(
+          toml(
+            """
+            fruit.name = "banana"     # this is best practice
+            fruit. color = "yellow"    # same as fruit.color
+            fruit . flavor = "banana"   # same as fruit.flavor
+            """
+          )
+        );
+    }
+
+    @Test
+    void extraWhitespaceTable() {
+        rewriteRun(
+          toml(
+            """
+              [a.b.c]            # this is best practice
+              [ d.e.f ]          # same as [d.e.f]
+              [ g .  h  . i ]    # same as [g.h.i]
+              [ j . "ʞ" . 'l' ]  # same as [j."ʞ".'l']
+              """
+          )
+        );
+    }
+
+    @Test
+    void extraWhitespaceArrayTable() {
+        rewriteRun(
+          toml(
+            """
+              [[a.b.c]]            # this is best practice
+              [[ d.e.f ]]          # same as [[d.e.f]]
+              [[ g .  h  . i ]]    # same as [[g.h.i]]
+              [[ j . "ʞ" . 'l' ]]  # same as [[j."ʞ".'l']]
+              """
+          )
+        );
+    }
 }
