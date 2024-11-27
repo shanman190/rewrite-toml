@@ -248,6 +248,6 @@ class TomlParserTest implements RewriteTest {
              site."google.com" = true
              """
           )
-        )
+        );
     }
 }

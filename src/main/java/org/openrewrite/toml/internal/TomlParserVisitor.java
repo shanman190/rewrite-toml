@@ -178,7 +178,7 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                         Markers.EMPTY,
                         TomlType.Primitive.Float,
                         rawNumber,
-                        rawNumber
+                        Double.NaN
                 );
             } else if (c.INF() != null) {
                 return new Toml.Literal(
@@ -187,12 +187,12 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                         Markers.EMPTY,
                         TomlType.Primitive.Float,
                         rawNumber,
-                        rawNumber
+                        source.charAt(cursor) == '-' ? Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY
                 );
             }
 
             String number = rawNumber.replace("_", "");
-            Float numberValue = Float.parseFloat(number);
+            Double numberValue = Double.parseDouble(number);
             return new Toml.Literal(
                     randomId(),
                     prefix,
