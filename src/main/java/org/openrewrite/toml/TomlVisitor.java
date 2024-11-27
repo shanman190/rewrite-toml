@@ -46,7 +46,7 @@ public class TomlVisitor<P> extends TreeVisitor<Toml, P> {
         Toml.Document d = document;
         d = d.withPrefix(visitSpace(d.getPrefix(), p));
         d = d.withMarkers(visitMarkers(d.getMarkers(), p));
-        d = d.withValues(ListUtils.map(d.getValues(), v -> visit(v, p)));
+        d = d.withValues(ListUtils.map(d.getValues(), v -> (TomlValue) visit(v, p)));
         d = d.withEof(visitSpace(d.getEof(), p));
         return d;
     }

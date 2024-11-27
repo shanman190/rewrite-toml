@@ -142,7 +142,7 @@ public interface Toml extends Tree {
             return withCharsetName(charset.name());
         }
 
-        List<Toml> values;
+        List<TomlValue> values;
         Space eof;
 
         @Override
@@ -265,7 +265,7 @@ public interface Toml extends Tree {
     @Value
     @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
     @With
-    class Literal implements TomlValue {
+    class Literal implements Toml {
         @EqualsAndHashCode.Include
         UUID id;
 
@@ -294,7 +294,7 @@ public interface Toml extends Tree {
     @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
     @RequiredArgsConstructor
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
-    class Table implements Toml {
+    class Table implements TomlValue {
         @Nullable
         @NonFinal
         transient WeakReference<Padding> padding;

@@ -88,10 +88,10 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
             );
         }
 
-        List<Toml> elements = new ArrayList<>();
+        List<TomlValue> elements = new ArrayList<>();
         // The last element is a "TerminalNode" which we are uninterested in
         for (int i = 0; i < ctx.children.size() - 1; i++) {
-            Toml element = visit(ctx.children.get(i));
+            TomlValue element = (TomlValue) visit(ctx.children.get(i));
             if (element != null) {
                 elements.add(element);
             }

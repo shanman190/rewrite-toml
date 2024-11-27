@@ -15,7 +15,7 @@
  */
 @NullMarked
 @NonNullFields
-package org.openrewrite.toml.tree;
+package org.openrewrite.toml.marker;
 
 import org.jspecify.annotations.NullMarked;
 import org.openrewrite.internal.lang.NonNullFields;
