@@ -178,7 +178,7 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                         Markers.EMPTY,
                         TomlType.Primitive.Float,
                         rawNumber,
-                        "nan"
+                        rawNumber
                 );
             } else if (c.INF() != null) {
                 return new Toml.Literal(
@@ -187,7 +187,7 @@ public class TomlParserVisitor extends TomlParserBaseVisitor<Toml> {
                         Markers.EMPTY,
                         TomlType.Primitive.Float,
                         rawNumber,
-                        "inf"
+                        rawNumber
                 );
             }
 
